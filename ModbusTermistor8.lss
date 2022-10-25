@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 16:00:06 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 16:20:40 2022
 
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
@@ -1693,15 +1693,15 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  		 .org $000        	; (RESET) 
 000000 c00e                               RJMP Reset
                                  		 .org $004
-000004 c46c                      		 RJMP TIMER2_OVF
+000004 c470                      		 RJMP TIMER2_OVF
                                  		;.org $008
                                  		 ;RJMP TIMER1_OVF
                                  		 .org $009
-000009 c495                      		 RJMP TIMER0_OVF
+000009 c499                      		 RJMP TIMER0_OVF
                                  		 .org $00b
-00000b c44a                      		 rjmp USART_RXC
+00000b c44e                      		 rjmp USART_RXC
                                  		 .org $00e
-00000e c403                      		 rjmp ADC_Conv_Complete
+00000e c407                      		 rjmp ADC_Conv_Complete
                                  
                                  Reset:
                                  
@@ -1766,7 +1766,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
 000034 2f30                      mov msg, temp
                                  
                                  
-000035 d3e6                      rcall USART_Init
+000035 d3ea                      rcall USART_Init
                                  ;ldi temp, 0x01
                                  ;sts devise_address, temp
                                  
@@ -1925,6 +1925,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  ;----------------------------- MAIN ---------------------------;
                                  main:
 0000b4 ec0f                      	ldi temp, 0b11001111
+                                 
 0000b5 b906                      	out ADCSRA, temp
 0000b6 e5a3                      	ldi XL,low(DO_data)			; Чтение значений из пямяти дискретных выводов для индикации
 0000b7 e0b1                      	ldi XH,high(DO_data)
@@ -1942,7 +1943,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  	;sts temperature, temp
                                  	;;;;;;;;;;
                                  
-0000bb d36a                      	rcall Temperature_Read
+0000bb d36e                      	rcall Temperature_Read
                                  
                                  	;;;;;;;;;;
 0000bc 9100 014c                 	lds temp, eeprom_flag
@@ -2745,24 +2746,27 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
 000409 ef6f                      	ldi CRCLo, 0xff
 00040a ef5f                      	ldi CRCHi, 0xff
                                  
-00040b efaf                      	ldi XL, low(0x1ff)
-00040c e0b1                          ldi XH, high(0x1ff)
-00040d 9611                      	adiw	X, 1
+00040b efaf                      	ldi XL, low(0xffff)
+00040c efbf                          ldi XH, high(0xffff)
+00040d 9711                      	sbiw  XH:XL,1  
 00040e f7f1                      		brne	PC-1
-00040f 98c0                      	cbi	PORTB,0
-                                 
-000410 9478                      	sei
-000411 cca2                      rjmp main
+00040f efaf                      	ldi XL, low(0xffff)
+000410 efbf                          ldi XH, high(0xffff)
+000411 9711                      	sbiw  XH:XL,1  
+000412 f7f1                      		brne	PC-1
+000413 98c0                      	cbi	PORTB,0
+000414 9478                      	sei
+000415 cc9e                      rjmp main
                                  
                                  
                                  ADC_Conv_Complete:					; Прерывание по окончанию преобразования
                                  	;cli
-000412 930f                      	push r16
-000413 b70f                      	in r16, SREG
-000414 930f                      	push r16
+000416 930f                      	push r16
+000417 b70f                      	in r16, SREG
+000418 930f                      	push r16
                                  	;lds razr1,ADCL
-000415 b105                      	in r16,ADCH
-000416 9300 0150                 	sts temperature, r16
+000419 b105                      	in r16,ADCH
+00041a 9300 0150                 	sts temperature, r16
                                  	;sts tmperature_data
                                  
                                  Vix:
@@ -2770,124 +2774,124 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  	out ADMUX, temp
                                  	ldi temp, 0b11011100
                                  	out ADCSRA, temp*/
-000418 910f                      	pop r16
-000419 bf0f                      	out SREG, r16
-00041a 910f                      	pop r16
+00041c 910f                      	pop r16
+00041d bf0f                      	out SREG, r16
+00041e 910f                      	pop r16
                                  	;sei
-00041b 9518                      reti
+00041f 9518                      reti
                                  
                                  USART_Init:          ; Настройка USART
-00041c 94f8                      cli
-00041d e000                      	ldi temp, high(UBRR_Value)
-00041e bd00                      	out UBRRH, temp
-00041f e607                      	ldi temp, low(UBRR_Value)
-000420 b909                      	out UBRRL, temp
+000420 94f8                      cli
+000421 e000                      	ldi temp, high(UBRR_Value)
+000422 bd00                      	out UBRRH, temp
+000423 e607                      	ldi temp, low(UBRR_Value)
+000424 b909                      	out UBRRL, temp
                                  
                                  	;ldi temp, (1<<UDRE)
                                  	;out UCSRA, temp
-000421 e908                      	ldi temp, (1<<TXEN)|(1<<RXEN)|(1<<RXCIE);|(1<<TXCIE0)||(1<< UDRIE0)
-000422 b90a                      	out UCSRB, temp
-000423 e80e                      	ldi temp,(1<<URSEL)|(3<<UCSZ0)|(1<< USBS)|(0<<UPM1)|(0<<UPM0)
-000424 bd00                      	out UCSRC, temp
+000425 e908                      	ldi temp, (1<<TXEN)|(1<<RXEN)|(1<<RXCIE);|(1<<TXCIE0)||(1<< UDRIE0)
+000426 b90a                      	out UCSRB, temp
+000427 e80e                      	ldi temp,(1<<URSEL)|(3<<UCSZ0)|(1<< USBS)|(0<<UPM1)|(0<<UPM0)
+000428 bd00                      	out UCSRC, temp
                                  
-000425 9518                      reti
+000429 9518                      reti
                                  
                                  Temperature_Read:		; Запись значений с термистора в оперативную память
-000426 930f                      	push r16
-000427 e807                      	ldi temp, 0b10000111
-000428 b906                      	out ADCSRA, temp
-                                 	;sei
-000429 b70f                      	in r16, SREG
 00042a 930f                      	push r16
-00042b 931f                      	push r17
-00042c 932f                      	push r18
+00042b e807                      	ldi temp, 0b10000111
+00042c b906                      	out ADCSRA, temp
+                                 	;sei
+00042d b70f                      	in r16, SREG
+00042e 930f                      	push r16
+00042f 931f                      	push r17
+000430 932f                      	push r18
                                  
-00042d 94f8                      	cli
-00042e eda3                      	ldi XL,low(AI_data)
-00042f e0b1                      	ldi XH,high(AI_data)
-000430 e000                      	ldi r16, 0x00
-000431 930d                      	st X+, r16
-000432 9100 0150                 	lds r16, temperature
-000434 930d                      	st X+, r16
-000435 e9a3                      	ldi XL,low(DI_data)
-000436 e0b1                      	ldi XH,high(DI_data)
-000437 912d                      	ld r18, X+
+000431 94f8                      	cli
+000432 eda3                      	ldi XL,low(AI_data)
+000433 e0b1                      	ldi XH,high(AI_data)
+000434 e000                      	ldi r16, 0x00
+000435 930d                      	st X+, r16
+000436 9100 0150                 	lds r16, temperature
+000438 930d                      	st X+, r16
+000439 e9a3                      	ldi XL,low(DI_data)
+00043a e0b1                      	ldi XH,high(DI_data)
+00043b 912d                      	ld r18, X+
                                  
-000438 9110 014e                 	lds r17, temperature_min
-00043a 1701                      	cp r16,r17
-00043b f440                      	brsh temp_over_min
-                                 
-00043c 9110 014f                 	lds r17, temperature_max
+00043c 9110 014e                 	lds r17, temperature_min
 00043e 1701                      	cp r16,r17
-00043f f040                      	brlo temp_over_max
-000440 7f2c                      		andi r18, 0b11111100
-000441 e005                      		ldi temp, 5 ;Выключаем таймер
-000442 bd05                      		out TCCR2, temp
+00043f f440                      	brsh temp_over_min
+                                 
+000440 9110 014f                 	lds r17, temperature_max
+000442 1701                      	cp r16,r17
+000443 f040                      	brlo temp_over_max
+000444 7f2c                      		andi r18, 0b11111100
+000445 e005                      		ldi temp, 5 ;Выключаем таймер
+000446 bd05                      		out TCCR2, temp
                                  		;cbi r18,0
                                  		;cbi r18,1
-000443 c008                      	rjmp temp_read_end
+000447 c008                      	rjmp temp_read_end
                                  	temp_over_min:
-000444 6021                      		ori r18, 0b00000001
+000448 6021                      		ori r18, 0b00000001
                                  		;andi r18, 0b11111101
                                  		;sbi r18,0
-000445 e005                      		ldi temp, 5 ;Включаем таймер
-000446 bd05                      		out TCCR2, temp
-000447 c004                      		rjmp temp_read_end
+000449 e005                      		ldi temp, 5 ;Включаем таймер
+00044a bd05                      		out TCCR2, temp
+00044b c004                      		rjmp temp_read_end
                                  	temp_over_max:
-000448 6022                      		ori r18, 0b00000010
+00044c 6022                      		ori r18, 0b00000010
                                  		;andi r18, 0b11111110
                                  		;sbi r18,1
-000449 e005                      		ldi temp, 5 ;Включаем таймер
-00044a bd05                      		out TCCR2,	 temp
-00044b c000                      		rjmp temp_read_end
+00044d e005                      		ldi temp, 5 ;Включаем таймер
+00044e bd05                      		out TCCR2,	 temp
+00044f c000                      		rjmp temp_read_end
                                  	temp_read_end:
-00044c 932e                      	st -X,r18
-00044d 9478                      	sei
+000450 932e                      	st -X,r18
+000451 9478                      	sei
                                  
-00044e 912f                      	pop r18
-00044f 911f                      	pop r17
+000452 912f                      	pop r18
+000453 911f                      	pop r17
                                  	;cli
-000450 ec0f                      	ldi temp, 0b11001111
-000451 b906                      	out ADCSRA, temp
+000454 ec0f                      	ldi temp, 0b11001111
+000455 b906                      	out ADCSRA, temp
                                  	;sei*/
-000452 910f                      	pop r16
-000453 bf0f                      	out SREG, r16
-000454 910f                      	pop r16
-000455 9508                      ret
+000456 910f                      	pop r16
+000457 bf0f                      	out SREG, r16
+000458 910f                      	pop r16
+000459 9508                      ret
                                  
                                  
                                  ;-------------Прерывание по приёму байта-----------------;
                                  USART_RXC:
-000456 930f                      	push r16
-000457 b70f                      	in r16, SREG
-000458 930f                      	push r16
-000459 933f                      	push r19
-00045a 934f                      	push r20
+00045a 930f                      	push r16
+00045b b70f                      	in r16, SREG
+00045c 930f                      	push r16
+00045d 933f                      	push r19
+00045e 934f                      	push r20
                                  
-00045b 9140 0120                 	lds r20,in_offset
-00045d 314f                      	cpi r20, BUF_LEN-1
-00045e f460                      	brsh RXC_end					; защита на слишком длинный пакет
+00045f 9140 0120                 	lds r20,in_offset
+000461 314f                      	cpi r20, BUF_LEN-1
+000462 f460                      	brsh RXC_end					; защита на слишком длинный пакет
                                  
-00045f b10b                      	in r16, UCSRA
-000460 ff07                      	sbrs r16, RXC
-000461 cff4                      	rjmp USART_RXC
+000463 b10b                      	in r16, UCSRA
+000464 ff07                      	sbrs r16, RXC
+000465 cff4                      	rjmp USART_RXC
                                  
                                  	in_setbyte:
-000462 b10c                      	in r16, UDR					 ;Запись в буфер приёма
-000463 9301                      	st Z+,r16
-000464 9543                      	inc r20 
-000465 9340 0120                 	sts in_offset, r20
-000467 e044                      	ldi r20,READ_TIME 
-000468 9340 0121                 	sts in_flag, r20
-00046a c000                      	rjmp RXC_end
+000466 b10c                      	in r16, UDR					 ;Запись в буфер приёма
+000467 9301                      	st Z+,r16
+000468 9543                      	inc r20 
+000469 9340 0120                 	sts in_offset, r20
+00046b e044                      	ldi r20,READ_TIME 
+00046c 9340 0121                 	sts in_flag, r20
+00046e c000                      	rjmp RXC_end
                                  
                                  	RXC_end:
-00046b 914f                      	pop r20
-00046c 913f                      	pop r19
-00046d 910f                      	pop r16
-00046e bf0f                      	out SREG, r16
-00046f 910f                      	pop r16
-000470 9518                      reti
+00046f 914f                      	pop r20
+000470 913f                      	pop r19
+000471 910f                      	pop r16
+000472 bf0f                      	out SREG, r16
+000473 910f                      	pop r16
+000474 9518                      reti
                                  
                                  /*TIMER2_OVF:							; Прерывание по переполнению 2 таймера
                                  	push r20
@@ -2919,86 +2923,86 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  reti*/
                                  
                                  TIMER2_OVF:							; Таймер на проверку перехода температуры
-000471 94f8                      	cli
-000472 930f                      	push r16
-000473 b70f                      	in r16, SREG
-000474 930f                      	push r16
+000475 94f8                      	cli
+000476 930f                      	push r16
+000477 b70f                      	in r16, SREG
+000478 930f                      	push r16
                                  
                                  	;ldi r16, 0b11000100
                                  	;out ADCSRA, temp
                                  
-000475 931f                      	push r17
-000476 932f                      	push r18
+000479 931f                      	push r17
+00047a 932f                      	push r18
                                  	;ldi temp, 0				;Вычключаем таймер
                                  	;out TCCR1B, temp
                                  	;/*
-000477 e000                      	ldi r16, 0
-000478 bd05                      	out TCCR2, r16
-000479 e9a3                      	ldi XL,low(DI_data)
-00047a e0b1                      	ldi XH,high(DI_data)
-00047b e020                      	ldi r18, 0x00
-00047c 9100 0150                 	lds r16, temperature
-00047e 9110 014f                 	lds r17, temperature_max
+00047b e000                      	ldi r16, 0
+00047c bd05                      	out TCCR2, r16
+00047d e9a3                      	ldi XL,low(DI_data)
+00047e e0b1                      	ldi XH,high(DI_data)
+00047f e020                      	ldi r18, 0x00
+000480 9100 0150                 	lds r16, temperature
+000482 9110 014f                 	lds r17, temperature_max
                                  
-000480 1701                      	cp r16, r17
-000481 f028                      	brlo over_max_confirm
-000482 9110 014e                 	lds r17, temperature_min
 000484 1701                      	cp r16, r17
-000485 f428                      	brsh over_min_confirm
+000485 f028                      	brlo over_max_confirm
+000486 9110 014e                 	lds r17, temperature_min
+000488 1701                      	cp r16, r17
+000489 f428                      	brsh over_min_confirm
                                  
-000486 c008                      	rjmp TIMER2_OVF_END
+00048a c008                      	rjmp TIMER2_OVF_END
                                  	over_max_confirm:
-000487 911d                      		ld r17, X+
-000488 fd11                      		sbrc r17,1
-000489 e022                      		ldi r18,0x02
-00048a c004                      		rjmp TIMER2_OVF_END
+00048b 911d                      		ld r17, X+
+00048c fd11                      		sbrc r17,1
+00048d e022                      		ldi r18,0x02
+00048e c004                      		rjmp TIMER2_OVF_END
                                  
                                  	over_min_confirm:
-00048b 911d                      		ld r17, X+
-00048c fd10                      		sbrc r17,0
-00048d e021                      		ldi r18,0x01
-00048e c000                      		rjmp TIMER2_OVF_END
+00048f 911d                      		ld r17, X+
+000490 fd10                      		sbrc r17,0
+000491 e021                      		ldi r18,0x01
+000492 c000                      		rjmp TIMER2_OVF_END
                                  	TIMER2_OVF_END:
                                  	
                                  	;ldi r16, 0
                                  	;out TCCR2, r16
                                  	; Запись в пямять для индикации
-00048f e5a3                      	ldi XL,low(DO_data)
-000490 e0b1                      	ldi XH,high(DO_data)
-000491 910d                      	ld r16, X+
+000493 e5a3                      	ldi XL,low(DO_data)
+000494 e0b1                      	ldi XH,high(DO_data)
+000495 910d                      	ld r16, X+
                                  	;andi r18,0b00000011
                                  	;lsl r18
-000492 0f22                      	lsl r18
-000493 0f22                      	lsl r18
-000494 0f22                      	lsl r18
-000495 7e07                      	andi r16, 0b11100111
-000496 2b02                      	or r16, r18
-000497 930e                      	st -X,r16
+000496 0f22                      	lsl r18
+000497 0f22                      	lsl r18
+000498 0f22                      	lsl r18
+000499 7e07                      	andi r16, 0b11100111
+00049a 2b02                      	or r16, r18
+00049b 930e                      	st -X,r16
                                  	;*/
                                  
-000498 912f                      	pop r18
-000499 911f                      	pop r17
+00049c 912f                      	pop r18
+00049d 911f                      	pop r17
                                  	;ldi r16, 0b11001001
                                  	;out ADCSRA, temp
-00049a 910f                      	pop r16
-00049b bf0f                      	out SREG, r16
-00049c 910f                      	pop r16
-00049d 9478                      	sei
-00049e 9518                      reti
+00049e 910f                      	pop r16
+00049f bf0f                      	out SREG, r16
+0004a0 910f                      	pop r16
+0004a1 9478                      	sei
+0004a2 9518                      reti
                                  
                                  TIMER0_OVF:							; Прерывание по переполнению 0 таймера - проверка на конец пакета
-00049f 934f                      	push r20
-0004a0 b74f                      	in r20, SREG
-0004a1 934f                      	push r20
-0004a2 9140 0121                 	lds r20, in_flag				; Цикл 4 раза проходит по времени принятия одного байта, и если новых байт на приёме нет,
-0004a4 2344                      	and r20,r20						; то в in_flag заносится 0,что сигнализирует о окончании пакета
-0004a5 f019                      	breq OVF0_end
-0004a6 954a                      	dec r20
-0004a7 9340 0121                 	sts in_flag,r20
+0004a3 934f                      	push r20
+0004a4 b74f                      	in r20, SREG
+0004a5 934f                      	push r20
+0004a6 9140 0121                 	lds r20, in_flag				; Цикл 4 раза проходит по времени принятия одного байта, и если новых байт на приёме нет,
+0004a8 2344                      	and r20,r20						; то в in_flag заносится 0,что сигнализирует о окончании пакета
+0004a9 f019                      	breq OVF0_end
+0004aa 954a                      	dec r20
+0004ab 9340 0121                 	sts in_flag,r20
                                    OVF0_end:
-0004a9 914f                      	pop r20
-0004aa bf4f                      	out SREG, r20
-0004ab 914f                      	pop r20
+0004ad 914f                      	pop r20
+0004ae bf4f                      	out SREG, r20
+0004af 914f                      	pop r20
 
 
 RESOURCE USE INFORMATION
@@ -3016,29 +3020,29 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega8A" register use summary:
-x  :  47 y  :  44 z  :  43 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
+x  :  46 y  :  44 z  :  43 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
 r13:   0 r14:   0 r15:   0 r16: 300 r17: 120 r18:  37 r19: 101 r20:  56 
-r21:  55 r22:  37 r23:   1 r24:  39 r25:   0 r26:  60 r27:  43 r28:   4 
+r21:  55 r22:  37 r23:   1 r24:  39 r25:   0 r26:  63 r27:  46 r28:   4 
 r29:   4 r30:   5 r31:   5 
 Registers used: 18 out of 35 (51.4%)
 
 "ATmega8A" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :  12 adiw  :   1 and   :   7 
+.lds  :   0 .sts  :   0 adc   :   0 add   :  12 adiw  :   0 and   :   7 
 andi  :   2 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   2 brcs  :   0 breq  :  29 brge  :   0 brhc  :   0 brhs  :   0 
-brid  :   0 brie  :   0 brlo  :  23 brlt  :   0 brmi  :   0 brne  :  58 
+brid  :   0 brie  :   0 brlo  :  23 brlt  :   0 brmi  :   0 brne  :  59 
 brpl  :   0 brsh  :  21 brtc  :   0 brts  :   0 brvc  :   0 brvs  :   0 
 bset  :   0 bst   :   0 cbi   :   3 cbr   :   0 clc   :   0 clh   :   0 
 cli   :  12 cln   :   0 clr   :   1 cls   :   0 clt   :   0 clv   :   0 
 clz   :   0 com   :   1 cp    :  12 cpc   :   0 cpi   :  77 cpse  :   3 
 dec   :  32 eor   :   6 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 
-ijmp  :   0 in    :  15 inc   :  40 ld    :  69 ldd   :   0 ldi   : 149 
+ijmp  :   0 in    :  15 inc   :  40 ld    :  69 ldd   :   0 ldi   : 151 
 lds   :  46 lpm   :   0 lsl   :   8 lsr   :   6 mov   :  22 movw  :   0 
 mul   :   1 muls  :   0 mulsu :   0 neg   :   0 nop   :   3 or    :   2 
 ori   :   2 out   :  50 pop   :  41 push  :  41 rcall :  28 ret   :   1 
 reti  :   5 rjmp  :  57 rol   :   4 ror   :   6 sbc   :   0 sbci  :   0 
-sbi   :  16 sbic  :   7 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   2 
+sbi   :  16 sbic  :   7 sbis  :   0 sbiw  :   2 sbr   :   0 sbrc  :   2 
 sbrs  :   4 sec   :   2 seh   :   0 sei   :  12 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
 st    :  64 std   :   0 sts   :  63 sub   :   4 subi  :   6 swap  :   0 
@@ -3048,7 +3052,7 @@ Instructions used: 49 out of 110 (44.5%)
 "ATmega8A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00095a   2374      0   2374    8192  29.0%
+[.cseg] 0x000000 0x000962   2382      0   2382    8192  29.1%
 [.dseg] 0x000060 0x000253      0    339    339    1024  33.1%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 
