@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:07:29 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:14:23 2022
 
 
 EQU  SIGNATURE_000 0000001e
@@ -508,8 +508,8 @@ EQU  TWIaddr      00000011
 EQU  SPMRaddr     00000012
 EQU  INT_VECTORS_SIZE 00000013
 EQU  BAUD         00002580
-EQU  XTAL         01312d00
-EQU  UBRR_value   00000081
+EQU  XTAL         00f42400
+EQU  UBRR_value   00000067
 EQU  BUF_LEN      00000020
 EQU  READ_TIME    00000004
 EQU  DATA_MEMORY_SIZE 00000040

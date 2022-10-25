@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:07:29 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:14:23 2022
 
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
@@ -792,7 +792,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  ;.include "ModbusLib.inc"
                                  .list 
                                  .equ BAUD = 9600							; Скорость для UART в Бодах
-                                 .equ XTAL = 20000000						; Частота в герцах
+                                 .equ XTAL = 16000000						; Частота в герцах
                                  .equ UBRR_value = (XTAL/(BAUD*16))-1		; Расчитывание значения для регистра UBRR
                                  
                                  .equ BUF_LEN =32							; Размер буфера для передачи данных
@@ -2761,7 +2761,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
 00040f 94f8                      cli
 000410 e000                      	ldi temp, high(UBRR_Value)
 000411 bd00                      	out UBRRH, temp
-000412 e801                      	ldi temp, low(UBRR_Value)
+000412 e607                      	ldi temp, low(UBRR_Value)
 000413 b909                      	out UBRRL, temp
                                  
                                  	;ldi temp, (1<<UDRE)
