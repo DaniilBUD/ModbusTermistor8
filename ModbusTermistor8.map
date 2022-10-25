@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 16:21:42 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 16:34:46 2022
 
 
 EQU  SIGNATURE_000 0000001e
@@ -547,13 +547,13 @@ DSEG DI_data      00000193
 DSEG AI_data      000001d3
 DSEG AO_data      00000213
 CSEG Reset        0000000f
-CSEG TIMER2_OVF   00000475
-CSEG TIMER0_OVF   000004a3
-CSEG USART_RXC    0000045a
-CSEG ADC_Conv_Complete 00000416
+CSEG TIMER2_OVF   0000047d
+CSEG TIMER0_OVF   000004ab
+CSEG USART_RXC    00000462
+CSEG ADC_Conv_Complete 0000041e
 CSEG mem_cl       00000019
 CSEG mem_cl2      0000001a
-CSEG USART_Init   00000420
+CSEG USART_Init   00000428
 CSEG EERead_loop@EERead@2463 00000038
 CSEG AdrRead_end  00000059
 CSEG EEWrite_loop@EEWrite@2486 0000004c
@@ -564,7 +564,7 @@ CSEG EERead_loop@EERead@2576 00000084
 CSEG TemMaxRead_end 000000a5
 CSEG EEWrite_loop@EEWrite@2599 00000098
 CSEG main         000000b4
-CSEG Temperature_Read 0000042a
+CSEG Temperature_Read 00000432
 CSEG EEPROM_write_end 000000d8
 CSEG EEWrite_loop@EEWrite@2695 000000c4
 CSEG Main_end     000000e0
@@ -674,13 +674,13 @@ CSEG zer1@crc16@3634 000003e6
 CSEG trans_loop@USART_Trancieve@3661 000003eb
 CSEG trans_loop@USART_Trancieve@3674 000003f4
 CSEG trans_loop@USART_Trancieve@3685 000003fb
-CSEG Vix          0000041c
-CSEG temp_over_min 00000448
-CSEG temp_over_max 0000044c
-CSEG temp_read_end 00000450
-CSEG RXC_end      0000046f
-CSEG in_setbyte   00000466
-CSEG over_max_confirm 0000048b
-CSEG over_min_confirm 0000048f
-CSEG TIMER2_OVF_END 00000493
-CSEG OVF0_end     000004ad
+CSEG Vix          00000424
+CSEG temp_over_min 00000450
+CSEG temp_over_max 00000454
+CSEG temp_read_end 00000458
+CSEG RXC_end      00000477
+CSEG in_setbyte   0000046e
+CSEG over_max_confirm 00000493
+CSEG over_min_confirm 00000497
+CSEG TIMER2_OVF_END 0000049b
+CSEG OVF0_end     000004b5
