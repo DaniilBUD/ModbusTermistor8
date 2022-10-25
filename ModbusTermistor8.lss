@@ -1,14 +1,10 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 00:25:14 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:07:29 2022
 
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2): Including file 'D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2): Including file 'D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
                                  
                                  .include "m8def.inc" ;Подключение стандартной библиотеки для работы с Atmega8
                                  
@@ -793,57 +789,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc(1):
                                  #endif  /* _M8DEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
-                                 .include "ModbusLib.inc"
-                                 
-                                 
-                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8.xml *************
-                                 ;*************************************************************************
-                                 ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
-                                 ;* 
-                                 ;* Number            : AVR000
-                                 ;* File Name         : "m8def.inc"
-                                 ;* Title             : Register/Bit Definitions for the ATmega8
-                                 ;* Date              : 2011-02-09
-                                 ;* Version           : 2.35
-                                 ;* Support E-mail    : avr@atmel.com
-                                 ;* Target MCU        : ATmega8
-                                 ;* 
-                                 ;* DESCRIPTION
-                                 ;* When including this file in the assembly program file, all I/O register 
-                                 ;* names and I/O register bit names appearing in the data book can be used.
-                                 ;* In addition, the six registers forming the three data pointers X, Y and 
-                                 ;* Z have been assigned names XL - ZH. Highest RAM address for Internal 
-                                 ;* SRAM is also defined 
-                                 ;* 
-                                 ;* The Register names are represented by their hexadecimal address.
-                                 ;* 
-                                 ;* The Register Bit names are represented by their bit number (0-7).
-                                 ;* 
-                                 ;* Please observe the difference in using the bit names with instructions
-                                 ;* such as "sbr"/"cbr" (set/clear bit in register) and "sbrs"/"sbrc"
-                                 ;* (skip if bit in register set/cleared). The following example illustrates
-                                 ;* this:
-                                 ;* 
-                                 ;* in    r16,PORTB             ;read PORTB latch
-                                 ;* sbr   r16,(1<<PB6)+(1<<PB5) ;set PB6 and PB5 (use masks, not bit#)
-                                 ;* out   PORTB,r16             ;output to PORTB
-                                 ;* 
-                                 ;* in    r16,TIFR              ;read the Timer Interrupt Flag Register
-                                 ;* sbrc  r16,TOV0              ;test the overflow flag (use bit#)
-                                 ;* rjmp  TOV0_is_set           ;jump if set
-                                 ;* ...                         ;otherwise do something else
-                                 ;*************************************************************************
-                                 
-                                 #ifndef _M8DEF_INC_
-                                 #endif  /* _M8DEF_INC_ */
-                                 
-                                 ; ***** END OF FILE ******************************************************
-                                 ;.equ	DATA_MEMORY_SIZE = 100
-                                 
-                                 
-                                 .dseg
-                                 
-                                 .cseg
+                                 ;.include "ModbusLib.inc"
                                  .list 
                                  .equ BAUD = 9600							; Скорость для UART в Бодах
                                  .equ XTAL = 20000000						; Частота в герцах

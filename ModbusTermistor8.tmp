@@ -10,7 +10,6 @@
  <SOURCE_FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc</FILE>
-  <FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\ModbusLib.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
   <FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\Debug\ModbusTermistor8.obj</FILE>
