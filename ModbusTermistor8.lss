@@ -1,24 +1,24 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:14:23 2022
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue Oct 25 13:30:13 2022
 
-[builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
-[builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8def.inc'
+[builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
+[builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
                                  
-                                 .include "m8def.inc" ;Подключение стандартной библиотеки для работы с Atmega8
+                                 .include "m8Adef.inc" ;Подключение стандартной библиотеки для работы с Atmega8
                                  
-                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8.xml *************
+                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8A.xml ************
                                  ;*************************************************************************
                                  ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
                                  ;* 
                                  ;* Number            : AVR000
-                                 ;* File Name         : "m8def.inc"
-                                 ;* Title             : Register/Bit Definitions for the ATmega8
+                                 ;* File Name         : "m8Adef.inc"
+                                 ;* Title             : Register/Bit Definitions for the ATmega8A
                                  ;* Date              : 2011-02-09
                                  ;* Version           : 2.35
                                  ;* Support E-mail    : avr@atmel.com
-                                 ;* Target MCU        : ATmega8
+                                 ;* Target MCU        : ATmega8A
                                  ;* 
                                  ;* DESCRIPTION
                                  ;* When including this file in the assembly program file, all I/O register 
@@ -46,15 +46,15 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  ;* ...                         ;otherwise do something else
                                  ;*************************************************************************
                                  
-                                 #ifndef _M8DEF_INC_
-                                 #define _M8DEF_INC_
+                                 #ifndef _M8ADEF_INC_
+                                 #define _M8ADEF_INC_
                                  
                                  
                                  #pragma partinc 0
                                  
                                  ; ***** SPECIFY DEVICE ***************************************************
-                                 .device ATmega8
-                                 #pragma AVRPART ADMIN PART_NAME ATmega8
+                                 .device ATmega8A
+                                 #pragma AVRPART ADMIN PART_NAME ATmega8A
                                  .equ	SIGNATURE_000	= 0x1e
                                  .equ	SIGNATURE_001	= 0x93
                                  .equ	SIGNATURE_002	= 0x07
@@ -742,22 +742,22 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  
                                  #pragma AVRPART CORE INSTRUCTIONS_NOT_SUPPORTED break
                                  
-                                 #endif  /* _M8DEF_INC_ */
+                                 #endif  /* _M8ADEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
                                  
-                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8.xml *************
+                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega8A.xml ************
                                  ;*************************************************************************
                                  ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
                                  ;* 
                                  ;* Number            : AVR000
-                                 ;* File Name         : "m8def.inc"
-                                 ;* Title             : Register/Bit Definitions for the ATmega8
+                                 ;* File Name         : "m8Adef.inc"
+                                 ;* Title             : Register/Bit Definitions for the ATmega8A
                                  ;* Date              : 2011-02-09
                                  ;* Version           : 2.35
                                  ;* Support E-mail    : avr@atmel.com
-                                 ;* Target MCU        : ATmega8
+                                 ;* Target MCU        : ATmega8A
                                  ;* 
                                  ;* DESCRIPTION
                                  ;* When including this file in the assembly program file, all I/O register 
@@ -785,8 +785,8 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Incl
                                  ;* ...                         ;otherwise do something else
                                  ;*************************************************************************
                                  
-                                 #ifndef _M8DEF_INC_
-                                 #endif  /* _M8DEF_INC_ */
+                                 #ifndef _M8ADEF_INC_
+                                 #endif  /* _M8ADEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
                                  ;.include "ModbusLib.inc"
@@ -2996,7 +2996,7 @@ counted separately from r26..r31 here.
 
 .dseg memory usage only counts static data declared with .byte
 
-"ATmega8" register use summary:
+"ATmega8A" register use summary:
 x  :  46 y  :  44 z  :  43 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
 r13:   0 r14:   0 r15:   0 r16: 299 r17: 120 r18:  37 r19: 101 r20:  56 
@@ -3004,7 +3004,7 @@ r21:  55 r22:  37 r23:   1 r24:  39 r25:   0 r26:  59 r27:  42 r28:   4
 r29:   4 r30:   5 r31:   5 
 Registers used: 18 out of 35 (51.4%)
 
-"ATmega8" instruction use summary:
+"ATmega8A" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :  12 adiw  :   0 and   :   7 
 andi  :   2 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   2 brcs  :   0 breq  :  29 brge  :   0 brhc  :   0 brhs  :   0 
@@ -3026,7 +3026,7 @@ st    :  64 std   :   0 sts   :  63 sub   :   4 subi  :   6 swap  :   0
 tst   :   0 wdr   :   0 
 Instructions used: 47 out of 110 (42.7%)
 
-"ATmega8" memory use summary [bytes]:
+"ATmega8A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
 [.cseg] 0x000000 0x000940   2348      0   2348    8192  28.7%
