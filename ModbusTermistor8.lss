@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Tue May 23 03:07:15 2023
+AVRASM ver. 2.2.8  D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm Mon May 29 00:50:41 2023
 
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
@@ -8,11 +8,11 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(21): war
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(22): warning: Use of undefined or forward referenced symbol 'AO_Data' in .equ/.set
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(24): warning: Use of undefined or forward referenced symbol 'AI_Data' in .equ/.set
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(25): warning: Use of undefined or forward referenced symbol 'AI_Data' in .equ/.set
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): warning: '/*' in comment 
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2209): warning: '/*' in comment 
 [builtin](2): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
 D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(1): Including file 'D:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m8Adef.inc'
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): warning: '/*' in comment 
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): warning: '/*' in comment 
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2209): warning: '/*' in comment 
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2209): warning: '/*' in comment 
                                  
                                  .include "m8Adef.inc" ;Подключение стандартной библиотеки для работы с Atmega8
                                  
@@ -1760,13 +1760,13 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  		 ;.org $004
                                  		 ;RJMP TIMER2_OVF
                                  		 .org $008
-000008 c5a7                      		 RJMP TIMER1_OVF
+000008 c5af                      		 RJMP TIMER1_OVF
                                  		 .org $009
-000009 c5dd                      		 RJMP TIMER0_OVF
+000009 c5e5                      		 RJMP TIMER0_OVF
                                  		 .org $00b
-00000b c574                      		 rjmp USART_RXC
+00000b c57c                      		 rjmp USART_RXC
                                  		 .org $00E
-00000e c507                      		 rjmp ADC_Conv_Complete
+00000e c50f                      		 rjmp ADC_Conv_Complete
                                  
                                  		 /*
                                  TempAr_Temp:
@@ -2121,7 +2121,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
 0000ad 2f30                      mov msg, temp
                                  
                                  
-0000ae d472                      rcall USART_Init
+0000ae d47a                      rcall USART_Init
                                  ;ldi temp, 0x01
                                  ;sts devise_address, temp
                                  /*
@@ -2267,107 +2267,115 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
 000129 bf0f
 00012a 910f                      EERead 0x02
 00012b 9100 014a                 lds		r16,	eeprom_data
-00012d c010                      rjmp	TemMinRead_End
+00012d c014                      rjmp	TemMinRead_End
                                  
                                  	TemMinRead_CLRD:	;Если память пуста, то записываем +25
                                  	;sts		eeprom_address,	r18
                                  	;sts		eeprom_data,	r17
-00012e e000                      	ldi		r16,	0x00
-00012f bb0f                      	out 	EEARH,	r16
-000130 e001                      	ldi		r16,	0x01
-000131 bb0e                      	out 	EEARL,	r16
+00012e 99e1                      	sbic 	EECR,EEWE
+00012f cffe                      		rjmp	PC-1
+000130 e000                      	ldi		r16,	0x00
+000131 bb0f                      	out 	EEARH,	r16
+000132 e001                      	ldi		r16,	0x01
+000133 bb0e                      	out 	EEARL,	r16
                                  	;ldi		r17,	0b00000011	
-000132 e010                      	ldi		r17,	0x00
-000133 9310 0215                 	sts		temperature_min,	r17	
-000135 2f21                      	mov		r18,	r17
-000136 d3d8                      		rcall	EEWrite_func
+000134 e010                      	ldi		r17,	0x00
+000135 9310 0215                 	sts		temperature_min,	r17	
+000137 2f21                      	mov		r18,	r17
+000138 d3de                      		rcall	EEWrite_func
                                  	;sts		eeprom_address,	r18
                                  	;sts		eeprom_data,	r17
                                  	;ldi		r16,	0b10100010
                                  	;ldi		r18,	0x02
-000137 e002                      	ldi		r16,	0x02
-000138 bb0e                      	out 	EEARL,	r16
+000139 99e1                      	sbic 	EECR,EEWE
+00013a cffe                      		rjmp	PC-1
+00013b e002                      	ldi		r16,	0x02
+00013c bb0e                      	out 	EEARL,	r16
                                  	;ldi		r16,	0b10100010
-000139 e104                      	ldi		r16,	Minimum
-00013a 9310 0216                 	sts		temperature_min+1,	r17	
-00013c 2f20                      	mov		r18,	r16
-00013d d3d1                      		rcall	EEWrite_func
+00013d e104                      	ldi		r16,	Minimum
+00013e 9300 0216                 	sts		temperature_min+1,	r16
+000140 2f20                      	mov		r18,	r16
+000141 d3d5                      		rcall	EEWrite_func
                                  
                                  TemMinRead_End:
-00013e 9310 0215                 sts	temperature_min,	r17
-000140 9310 014f                 sts	prev_temperature_min,	r17
-000142 9300 0216                 sts	temperature_min+1,	r16
-000144 9300 0150                 sts	prev_temperature_min+1,	r16
+000142 9310 0215                 sts	temperature_min,	r17
+000144 9310 014f                 sts	prev_temperature_min,	r17
+000146 9300 0216                 sts	temperature_min+1,	r16
+000148 9300 0150                 sts	prev_temperature_min+1,	r16
                                  
                                  ;Чтение максимального порога температуры
-000146 99e1
-000147 cffe
-000148 930f
-000149 b70f
-00014a 930f
-00014b e000
-00014c bf0f
-00014d 938f
-00014e e080
-00014f bb8f
-000150 e083
-000151 bb8e
-000152 9ae0
-000153 b38d
-000154 9380 014a
-000156 0000
-000157 0000
-000158 0000
-000159 0000
-00015a 918f
-00015b 910f
-00015c bf0f
-00015d 910f                      EERead 0x03
-00015e 9110 014a                 lds		r17,	eeprom_data
-000160 3f1f                      cpi		r17,	0xff
-000161 f0d9                      	breq	TemMaxRead_CLRD
-000162 99e1
-000163 cffe
-000164 930f
-000165 b70f
-000166 930f
-000167 e000
-000168 bf0f
-000169 938f
-00016a e080
-00016b bb8f
-00016c e084
-00016d bb8e
-00016e 9ae0
-00016f b38d
-000170 9380 014a
-000172 0000
-000173 0000
-000174 0000
-000175 0000
-000176 918f
-000177 910f
-000178 bf0f
-000179 910f                      EERead 0x04
-00017a 9100 014a                 lds		r16,	eeprom_data			
-00017c c010                      rjmp	TemMaxRead_End
+00014a 99e1
+00014b cffe
+00014c 930f
+00014d b70f
+00014e 930f
+00014f e000
+000150 bf0f
+000151 938f
+000152 e080
+000153 bb8f
+000154 e083
+000155 bb8e
+000156 9ae0
+000157 b38d
+000158 9380 014a
+00015a 0000
+00015b 0000
+00015c 0000
+00015d 0000
+00015e 918f
+00015f 910f
+000160 bf0f
+000161 910f                      EERead 0x03
+000162 9110 014a                 lds		r17,	eeprom_data
+000164 3f1f                      cpi		r17,	0xff
+000165 f0d9                      	breq	TemMaxRead_CLRD
+000166 99e1
+000167 cffe
+000168 930f
+000169 b70f
+00016a 930f
+00016b e000
+00016c bf0f
+00016d 938f
+00016e e080
+00016f bb8f
+000170 e084
+000171 bb8e
+000172 9ae0
+000173 b38d
+000174 9380 014a
+000176 0000
+000177 0000
+000178 0000
+000179 0000
+00017a 918f
+00017b 910f
+00017c bf0f
+00017d 910f                      EERead 0x04
+00017e 9100 014a                 lds		r16,	eeprom_data			
+000180 c014                      rjmp	TemMaxRead_End
                                  	TemMaxRead_CLRD:	;Если память пуста, то записываем +60
-00017d e000                      	ldi		r16,	0x00
-00017e bb0f                      	out 	EEARH,	r16
-00017f e003                      	ldi		r16,	0x03
-000180 bb0e                      	out 	EEARL,	r16
+000181 99e1                      	sbic 	EECR,EEWE
+000182 cffe                      		rjmp	PC-1
+000183 e000                      	ldi		r16,	0x00
+000184 bb0f                      	out 	EEARH,	r16
+000185 e003                      	ldi		r16,	0x03
+000186 bb0e                      	out 	EEARL,	r16
                                  	;ldi		r17,	0b00000010
-000181 e010                      	ldi		r17,	0x00
-000182 9310 0217                 	sts		temperature_max,	r17	
-000184 2f21                      	mov		r18,	r17
-000185 d389                      		rcall	EEWrite_func
-000186 e004                      	ldi		r16,	0x04
-000187 bb0e                      	out 	EEARL,	r16
+000187 e010                      	ldi		r17,	0x00
+000188 9310 0217                 	sts		temperature_max,	r17	
+00018a 2f21                      	mov		r18,	r17
+00018b d38b                      		rcall	EEWrite_func
+00018c 99e1                      	sbic 	EECR,EEWE
+00018d cffe                      		rjmp	PC-1
+00018e e004                      	ldi		r16,	0x04
+00018f bb0e                      	out 	EEARL,	r16
                                  	;ldi		r16,	0b11011010
-000188 e208                      	ldi		r16,	Maximum
-000189 9300 0218                 	sts		temperature_max+1,	r16
-00018b 2f20                      	mov		r18,	r16
-00018c d382                      		rcall	EEWrite_func
+000190 e208                      	ldi		r16,	Maximum
+000191 9300 0218                 	sts		temperature_max+1,	r16
+000193 2f20                      	mov		r18,	r16
+000194 d382                      		rcall	EEWrite_func
                                  	/*
                                  	ldi		r17,	0b00000010
                                  	ldi		r18,	0x03
@@ -2381,10 +2389,10 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	EEWrite
                                  	*/
                                  TemMaxRead_End:
-00018d 9310 0217                 sts	temperature_max,	r17
-00018f 9310 0151                 sts	prev_temperature_max,	r17
-000191 9300 0218                 sts	temperature_max+1,	r16
-000193 9300 0152                 sts	prev_temperature_max+1,	r16
+000195 9310 0217                 sts	temperature_max,	r17
+000197 9310 0151                 sts	prev_temperature_max,	r17
+000199 9300 0218                 sts	temperature_max+1,	r16
+00019b 9300 0152                 sts	prev_temperature_max+1,	r16
                                  /*
                                  EERead 0x01
                                  lds temp, eeprom_data
@@ -2417,8 +2425,8 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  st	X+,	temp
                                  sts temperature_max, temp
                                  */
-000195 99e1                      sbic	EECR,EEWE		; Ждем готовности памяти к записи. Крутимся в цикле
-000196 cffe                      rjmp	PC-1
+00019d 99e1                      sbic	EECR,EEWE		; Ждем готовности памяти к записи. Крутимся в цикле
+00019e cffe                      rjmp	PC-1
                                  
                                  /*
                                  ; Установление min и max для температуры
@@ -2427,16 +2435,16 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  ldi temp, 0b10110110 ; Верхнее ограничение диапазона температуры  +60
                                  sts temperature_max, temp*/
                                  
-000197 e000                      ldi temp, 0x00
-000198 9300 014d                 sts	system_reg,	temp
-00019a 9300 0120                 sts in_offset, temp
-00019c 9300 0122                 sts in_count, temp
+00019f e000                      ldi temp, 0x00
+0001a0 9300 014d                 sts	system_reg,	temp
+0001a2 9300 0120                 sts in_offset, temp
+0001a4 9300 0122                 sts in_count, temp
                                  
-00019e e0e0                      ldi ZL, low(in_data)
-00019f e0f1                      ldi ZH, high(in_data)
+0001a6 e0e0                      ldi ZL, low(in_data)
+0001a7 e0f1                      ldi ZH, high(in_data)
                                  
-0001a0 e2c3                      ldi YL, low(out_data)
-0001a1 e0d1                      ldi YH, high(out_data)
+0001a8 e2c3                      ldi YL, low(out_data)
+0001a9 e0d1                      ldi YH, high(out_data)
                                  
                                  /*
                                  ldi XL, low(AO_data)
@@ -2445,8 +2453,8 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  ldi	temp,	0x03
                                  st	X+,		temp
                                  */
-0001a2 9aad                      sbi	PORTC,	5
-0001a3 9478                      sei
+0001aa 9aad                      sbi	PORTC,	5
+0001ab 9478                      sei
                                  /*
                                  ldi ZL,low(in_data)	
                                  ldi ZH,high(in_data)
@@ -2468,18 +2476,18 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  
                                  ;----------------------------- MAIN ---------------------------;
                                  main:
-0001a4 ec0f                      	ldi temp, 0b11001111
-0001a5 b906                      	out ADCSRA, temp
+0001ac ec0f                      	ldi temp, 0b11001111
+0001ad b906                      	out ADCSRA, temp
                                  	
-0001a6 9100 0193                 	lds		temp,	DI_Data
-0001a8 fd00                      	sbrc	temp,	0
-0001a9 9aab                      		sbi		PORTC,	3
-0001aa ff00                      	sbrs	temp,	0
-0001ab 98ab                      		cbi		PORTC,	3
-0001ac fd01                      	sbrc	temp,	1
-0001ad 9aac                      		sbi		PORTC,	4
-0001ae ff01                      	sbrs	temp,	1
-0001af 98ac                      		cbi		PORTC,	4
+0001ae 9100 0193                 	lds		temp,	DI_Data
+0001b0 fd00                      	sbrc	temp,	0
+0001b1 9aab                      		sbi		PORTC,	3
+0001b2 ff00                      	sbrs	temp,	0
+0001b3 98ab                      		cbi		PORTC,	3
+0001b4 fd01                      	sbrc	temp,	1
+0001b5 9aac                      		sbi		PORTC,	4
+0001b6 ff01                      	sbrs	temp,	1
+0001b7 98ac                      		cbi		PORTC,	4
                                  	/*
                                  	lds		temp,	DI_Data		; Чтение значений из пямяти дискретных выводов для индикации
                                  
@@ -2496,7 +2504,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	cbi		PORTC,	4
                                  	*/
                                  	;sbi PORTC,5
-0001b0 9892                      	cbi PORTD,2
+0001b8 9892                      	cbi PORTD,2
                                  	;ld sys, X+
                                  	;ldi XL,low(DI_data)			; Опрос дискретных входов и занесение значений в память DI
                                  	;ldi XH,high(DI_data)
@@ -2507,34 +2515,34 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	;sts temperature, temp
                                  	;;;;;;;;;;
                                  
-0001b1 d378                      	rcall Temperature_Read
+0001b9 d378                      	rcall Temperature_Read
                                  
                                  	;;;;;;;;;;
-0001b2 94f8                      	cli
+0001ba 94f8                      	cli
                                  	;ldi XL,low(AO_data)			; Чтение значений из пямяти аналоговых выводов для изменения еепром
                                  	;ldi XH,high(AO_data)
                                  	;lds	temp,	devise_address
                                  	;ld	sys,	X+
                                  	;ld	sys,	X+
-0001b3 0000                      	nop
-0001b4 0000                      	nop
+0001bb 0000                      	nop
+0001bc 0000                      	nop
                                  	/*cpi	sys,	0x00	
                                  	brne PC+4
                                  		st	-X,		temp
                                  		ld	sys,	X+
                                  		rjmp	PC+3*/
                                  	;rjmp	main_check_tempmin
-0001b5 9100 0214                 	lds	temp,	devise_address
-0001b7 9110 014e                 	lds	sys,	prev_devise_address
-0001b9 1701                      	cp	temp,	sys
-0001ba f041                      	breq	main_check_tempmin
-0001bb e010                      		ldi		sys,	0x00
-0001bc bb1f                      		out 	EEARH,	sys
-0001bd e010                      		ldi		sys,	0x00
-0001be bb1e                      		out 	EEARL,	sys
-0001bf 2f20                      		mov		r18,	temp
-0001c0 d34e                      			rcall	EEWrite_func
-0001c1 9300 014e                 		sts		prev_devise_address,	temp
+0001bd 9100 0214                 	lds	temp,	devise_address
+0001bf 9110 014e                 	lds	sys,	prev_devise_address
+0001c1 1701                      	cp	temp,	sys
+0001c2 f041                      	breq	main_check_tempmin
+0001c3 e010                      		ldi		sys,	0x00
+0001c4 bb1f                      		out 	EEARH,	sys
+0001c5 e010                      		ldi		sys,	0x00
+0001c6 bb1e                      		out 	EEARL,	sys
+0001c7 2f20                      		mov		r18,	temp
+0001c8 d34e                      			rcall	EEWrite_func
+0001c9 9300 014e                 		sts		prev_devise_address,	temp
                                  		/*
                                  		sbi		PORTC,	5
                                  		sts		prev_devise_address,	sys
@@ -2546,51 +2554,51 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  		rjmp	main_AO_check_end
                                  		*/
                                  	main_check_tempmin:
-0001c3 9110 014f                 	lds		r17,	prev_temperature_min
-0001c5 9100 0150                 	lds		r16,	prev_temperature_min+1
-0001c7 91b0 0215                 	lds		XH,		temperature_min
-0001c9 91a0 0216                 	lds		XL,		temperature_min+1
-0001cb 171b                      	cp		r17,	XH
-0001cc f419                      		brne	main_check_tempmin_chgd
-0001cd 170a                      	cp		r16,	XL
-0001ce f409                      		brne	main_check_tempmin_chgd
-0001cf c00e                      	rjmp	main_check_tempmax
+0001cb 9110 014f                 	lds		r17,	prev_temperature_min
+0001cd 9100 0150                 	lds		r16,	prev_temperature_min+1
+0001cf 91b0 0215                 	lds		XH,		temperature_min
+0001d1 91a0 0216                 	lds		XL,		temperature_min+1
+0001d3 171b                      	cp		r17,	XH
+0001d4 f419                      		brne	main_check_tempmin_chgd
+0001d5 170a                      	cp		r16,	XL
+0001d6 f409                      		brne	main_check_tempmin_chgd
+0001d7 c00e                      	rjmp	main_check_tempmax
                                  		main_check_tempmin_chgd:
-0001d0 e000                      		ldi		r16,	0x00
-0001d1 bb0f                      		out 	EEARH,	r16
-0001d2 e001                      		ldi		r16,	0x01
-0001d3 bb0e                      		out 	EEARL,	r16
-0001d4 2f2b                      		mov		r18,	XH
-0001d5 d339                      			rcall	EEWrite_func
-0001d6 e002                      		ldi		r16,	0x02
-0001d7 bb0e                      		out 	EEARL,	r16
-0001d8 2f2a                      		mov		r18,	XL
-0001d9 d335                      			rcall	EEWrite_func
-0001da 93b0 014f                 		sts		prev_temperature_min,	XH
-0001dc 93a0 0150                 		sts		prev_temperature_min+1,	XL
+0001d8 e000                      		ldi		r16,	0x00
+0001d9 bb0f                      		out 	EEARH,	r16
+0001da e001                      		ldi		r16,	0x01
+0001db bb0e                      		out 	EEARL,	r16
+0001dc 2f2b                      		mov		r18,	XH
+0001dd d339                      			rcall	EEWrite_func
+0001de e002                      		ldi		r16,	0x02
+0001df bb0e                      		out 	EEARL,	r16
+0001e0 2f2a                      		mov		r18,	XL
+0001e1 d335                      			rcall	EEWrite_func
+0001e2 93b0 014f                 		sts		prev_temperature_min,	XH
+0001e4 93a0 0150                 		sts		prev_temperature_min+1,	XL
                                  	main_check_tempmax:
-0001de 9110 0151                 	lds		r17,	prev_temperature_max
-0001e0 9100 0152                 	lds		r16,	prev_temperature_max+1
-0001e2 91b0 0217                 	lds		XH,		temperature_max
-0001e4 91a0 0218                 	lds		XL,		temperature_max+1
-0001e6 171b                      	cp		r17,	XH
-0001e7 f419                      		brne	main_check_tempmax_chgd
-0001e8 170a                      	cp		r16,	XL
-0001e9 f409                      		brne	main_check_tempmax_chgd
-0001ea c00e                      	rjmp	main_AO_check_end
+0001e6 9110 0151                 	lds		r17,	prev_temperature_max
+0001e8 9100 0152                 	lds		r16,	prev_temperature_max+1
+0001ea 91b0 0217                 	lds		XH,		temperature_max
+0001ec 91a0 0218                 	lds		XL,		temperature_max+1
+0001ee 171b                      	cp		r17,	XH
+0001ef f419                      		brne	main_check_tempmax_chgd
+0001f0 170a                      	cp		r16,	XL
+0001f1 f409                      		brne	main_check_tempmax_chgd
+0001f2 c00e                      	rjmp	main_AO_check_end
                                  		main_check_tempmax_chgd:
-0001eb e000                      		ldi		r16,	0x00
-0001ec bb0f                      		out 	EEARH,	r16
-0001ed e003                      		ldi		r16,	0x03
-0001ee bb0e                      		out 	EEARL,	r16
-0001ef 2f2b                      		mov		r18,	XH
-0001f0 d31e                      			rcall	EEWrite_func
-0001f1 e004                      		ldi		r16,	0x04
-0001f2 bb0e                      		out 	EEARL,	r16
-0001f3 2f2a                      		mov		r18,	XL
-0001f4 d31a                      			rcall	EEWrite_func
-0001f5 93b0 0151                 		sts		prev_temperature_max,	XH
-0001f7 93a0 0152                 		sts		prev_temperature_max+1,	XL
+0001f3 e000                      		ldi		r16,	0x00
+0001f4 bb0f                      		out 	EEARH,	r16
+0001f5 e003                      		ldi		r16,	0x03
+0001f6 bb0e                      		out 	EEARL,	r16
+0001f7 2f2b                      		mov		r18,	XH
+0001f8 d31e                      			rcall	EEWrite_func
+0001f9 e004                      		ldi		r16,	0x04
+0001fa bb0e                      		out 	EEARL,	r16
+0001fb 2f2a                      		mov		r18,	XL
+0001fc d31a                      			rcall	EEWrite_func
+0001fd 93b0 0151                 		sts		prev_temperature_max,	XH
+0001ff 93a0 0152                 		sts		prev_temperature_max+1,	XL
                                  	/*
                                  	cp	temp,	sys
                                  	rjmp	main_check_tempmax
@@ -2614,7 +2622,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  		sts		eeprom_address, temp
                                  	*/
                                  	main_AO_check_end:
-0001f9 9478                      	sei
+000201 9478                      	sei
                                  	/*
                                  	lds temp, eeprom_flag
                                  	cpi temp, 0x01
@@ -2631,675 +2639,675 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  		sei
                                  	EEPROM_write_end:
                                  	*/
-0001fa 9100 0120                 	lds temp, in_offset				; ждать появления первого байта
-0001fc 2300                      	and temp,temp
-0001fd f021                      		breq Main_end
-0001fe 9a97                      	sbi	PORTD,7
+000202 9100 0120                 	lds temp, in_offset				; ждать появления первого байта
+000204 2300                      	and temp,temp
+000205 f021                      		breq Main_end
+000206 9a97                      	sbi	PORTD,7
                                  	; Переход на приём/передачу по modbus
                                  	;ldi temp, 0b00001111			; выключаем АЦП
-0001ff e00f                      	ldi temp, 0b00001111
-000200 b906                      	out ADCSRA, temp
-000201 c001                      	rjmp MODBUS_Communication
+000207 e00f                      	ldi temp, 0b00001111
+000208 b906                      	out ADCSRA, temp
+000209 c001                      	rjmp MODBUS_Communication
                                  	Main_end:
-000202 cfa1                      rjmp main
+00020a cfa1                      rjmp main
                                  
                                  ;--------------------------- КОНЕЦ MAIN'А---------------------;
                                  
                                  ;-------------------- ПРИЁМ/ПЕРЕДАЧА ПО MODBUS----------------;
                                  MODBUS_Communication:
                                  	;/*
-000203 e0f1                      	ldi ZH, high(in_data)
-000204 e0e0                      	ldi ZL, low(in_data)
-000205 9101                      	ld	temp,	Z+
+00020b e0f1                      	ldi ZH, high(in_data)
+00020c e0e0                      	ldi ZL, low(in_data)
+00020d 9101                      	ld	temp,	Z+
                                  	;ld temp, -Z					; проверка адреса устройства
                                  	;st Z+, temp
-000206 3000                      	cpi	temp,	0
-000207 f029                      	breq	wait_end
+00020e 3000                      	cpi	temp,	0
+00020f f029                      	breq	wait_end
                                  
-000208 9110 0214                 	lds sys, devise_address
-00020a 1701                      	cp	temp,	sys
-00020b f009                      	breq	wait_end
-00020c c2e4                      	rjmp	Modbus_end
+000210 9110 0214                 	lds sys, devise_address
+000212 1701                      	cp	temp,	sys
+000213 f009                      	breq	wait_end
+000214 c2e4                      	rjmp	Modbus_end
                                  	;cpse temp, sys
                                  	;rjmp Modbus_end
                                  
                                    wait_end:
-00020d 9100 0121                 	lds temp, in_flag			; ждать завершения принятого пакета
-00020f 2300                      	and temp,temp
-000210 f7e1                      	brne wait_end
+000215 9100 0121                 	lds temp, in_flag			; ждать завершения принятого пакета
+000217 2300                      	and temp,temp
+000218 f7e1                      	brne wait_end
                                  	
-000211 94f8                      	cli
-000212 9897                      	cbi	PORTD,7
-000213 e0f1                      	ldi ZH, high(in_data)
-000214 e0e0                      	ldi ZL, low(in_data)
-000215 9100 0120                 	lds temp,in_offset
+000219 94f8                      	cli
+00021a 9897                      	cbi	PORTD,7
+00021b e0f1                      	ldi ZH, high(in_data)
+00021c e0e0                      	ldi ZL, low(in_data)
+00021d 9100 0120                 	lds temp,in_offset
                                    calc_crc:
-000217 9131                      	ld msg, Z+
-000218 930f
-000219 931f
-00021a 2f03
-00021b e018
-00021c 2760
-00021d 9556
-00021e 9567
-00021f f420
-000220 ea00
-000221 2750
-000222 e001
-000223 2760
-000224 951a
-000225 f7b9
-000226 911f
-000227 910f                      	crc16 msg
-000228 950a                      	dec temp
-000229 f769                      	brne calc_crc
+00021f 9131                      	ld msg, Z+
+000220 930f
+000221 931f
+000222 2f03
+000223 e018
+000224 2760
+000225 9556
+000226 9567
+000227 f420
+000228 ea00
+000229 2750
+00022a e001
+00022b 2760
+00022c 951a
+00022d f7b9
+00022e 911f
+00022f 910f                      	crc16 msg
+000230 950a                      	dec temp
+000231 f769                      	brne calc_crc
                                  
-00022a e000                      	ldi temp, 0x00				; Проверка CRC
-00022b 1350                      	cpse CRCHi, temp
-00022c c2c4                      	rjmp Modbus_end
-00022d 1356                      	cpse CRCHi,CRCLo
-00022e c2c2                      	rjmp Modbus_end
+000232 e000                      	ldi temp, 0x00				; Проверка CRC
+000233 1350                      	cpse CRCHi, temp
+000234 c2c4                      	rjmp Modbus_end
+000235 1356                      	cpse CRCHi,CRCLo
+000236 c2c2                      	rjmp Modbus_end
                                  	;*/
                                    end_receive:
-00022f 9100 0120                 	lds temp, in_offset			; сформировать число принятых байтов
-000231 950a                      	dec temp
-000232 950a                      	dec temp
-000233 9300 0122                 	sts in_count,temp
+000237 9100 0120                 	lds temp, in_offset			; сформировать число принятых байтов
+000239 950a                      	dec temp
+00023a 950a                      	dec temp
+00023b 9300 0122                 	sts in_count,temp
                                  
-000235 e0f1                      	ldi ZH, high(in_data)	
-000236 e0e0                      	ldi ZL, low(in_data)
-000237 e0d1                      	ldi YH, high(out_data)
-000238 e2c3                      	ldi YL, low(out_data)
+00023d e0f1                      	ldi ZH, high(in_data)	
+00023e e0e0                      	ldi ZL, low(in_data)
+00023f e0d1                      	ldi YH, high(out_data)
+000240 e2c3                      	ldi YL, low(out_data)
                                  ;----------Запись адреса в буфер и определение modbus функции-------;
-000239 9131                      	ld msg,Z+
-00023a 9339                      	st Y+, msg
-00023b 9121                      	ld function, Z+
-00023c e042                      	ldi lenght, 2
+000241 9131                      	ld msg,Z+
+000242 9339                      	st Y+, msg
+000243 9121                      	ld function, Z+
+000244 e042                      	ldi lenght, 2
                                  
-00023d 930f
-00023e b70f
-00023f 930f
-000240 931f
-000241 933f
-000242 935f
-000243 936f
-000244 3021
-000245 f079
-000246 3022
-000247 f071
-000248 3023
-000249 f069
-00024a 3024
-00024b f061
-00024c 3025
-00024d f059
-00024e 3026
-00024f f059
-000250 302f
-000251 f041
-000252 3120
-000253 f041
-000254 f441
-000255 c008
-000256 c055
-000257 c0a2
-000258 c0d5
-000259 c108
-00025a c163
-00025b c13f
-00025c c1e9
-00025d c220
-00025e 91b1
-00025f 91a1
-000260 30b0
-000261 f479
-000262 30a0
-000263 f068
-000264 30a4
-000265 f458
-000266 9101
-000267 3000
-000268 f449
-000269 9101
-00026a 3001
-00026b f030
-00026c e31e
-00026d 1b1a
-00026e 1701
-00026f f410
-000270 c002
-000271 c21a
-000272 c227
-000273 93b0 0145
-000275 93a0 0146
-000277 9300 0149
-000279 9329
-00027a e010
-00027b ef3f
-00027c 9513
-00027d 3008
-00027e f018
-00027f 5008
-000280 f009
-000281 f7d1
-000282 9319
-000283 9543
-000284 2f31
-000285 9100 0146
-000287 e010
-000288 9513
-000289 3008
-00028a f018
-00028b 5008
-00028c f009
-00028d f7d1
-00028e e0b1
-00028f e5a3
-000290 915d
-000291 951a
-000292 f7e9
-000293 916d
-000294 3000
-000295 f021
-000296 9566
-000297 9557
-000298 950a
-000299 f7e1
-00029a 910e
-00029b e000
-00029c 9110 0149
-00029e 9408
-00029f 1f00
-0002a0 951a
+000245 930f
+000246 b70f
+000247 930f
+000248 931f
+000249 933f
+00024a 935f
+00024b 936f
+00024c 3021
+00024d f079
+00024e 3022
+00024f f071
+000250 3023
+000251 f069
+000252 3024
+000253 f061
+000254 3025
+000255 f059
+000256 3026
+000257 f059
+000258 302f
+000259 f041
+00025a 3120
+00025b f041
+00025c f441
+00025d c008
+00025e c055
+00025f c0a2
+000260 c0d5
+000261 c108
+000262 c163
+000263 c13f
+000264 c1e9
+000265 c220
+000266 91b1
+000267 91a1
+000268 30b0
+000269 f479
+00026a 30a0
+00026b f068
+00026c 30a4
+00026d f458
+00026e 9101
+00026f 3000
+000270 f449
+000271 9101
+000272 3001
+000273 f030
+000274 e31e
+000275 1b1a
+000276 1701
+000277 f410
+000278 c002
+000279 c21a
+00027a c227
+00027b 93b0 0145
+00027d 93a0 0146
+00027f 9300 0149
+000281 9329
+000282 e010
+000283 ef3f
+000284 9513
+000285 3008
+000286 f018
+000287 5008
+000288 f009
+000289 f7d1
+00028a 9319
+00028b 9543
+00028c 2f31
+00028d 9100 0146
+00028f e010
+000290 9513
+000291 3008
+000292 f018
+000293 5008
+000294 f009
+000295 f7d1
+000296 e0b1
+000297 e5a3
+000298 915d
+000299 951a
+00029a f7e9
+00029b 916d
+00029c 3000
+00029d f021
+00029e 9566
+00029f 9557
+0002a0 950a
 0002a1 f7e1
-0002a2 2350
-0002a3 9359
-0002a4 9543
-0002a5 2f56
-0002a6 916d
-0002a7 953a
-0002a8 f7c9
-0002a9 9340 0143
-0002ab c20a
-0002ac 91b1
-0002ad 91a1
-0002ae 30b0
-0002af f479
-0002b0 30a0
-0002b1 f068
-0002b2 34a0
-0002b3 f458
-0002b4 9101
-0002b5 3000
-0002b6 f449
-0002b7 9101
-0002b8 3001
-0002b9 f030
-0002ba e31e
-0002bb 1b1a
-0002bc 1701
-0002bd f410
-0002be c002
-0002bf c1cc
-0002c0 c1d9
-0002c1 93b0 0145
-0002c3 93a0 0146
-0002c5 9300 0149
-0002c7 9329
-0002c8 e010
-0002c9 ef3f
-0002ca 9513
-0002cb 3008
-0002cc f018
-0002cd 5008
-0002ce f009
-0002cf f7d1
-0002d0 9319
-0002d1 9543
-0002d2 2f31
-0002d3 9100 0146
-0002d5 e010
-0002d6 9513
-0002d7 3008
-0002d8 f018
-0002d9 5008
-0002da f009
-0002db f7d1
-0002dc e0b1
-0002dd e9a3
-0002de 915d
-0002df 951a
-0002e0 f7e9
-0002e1 916d
-0002e2 3000
-0002e3 f021
-0002e4 9566
-0002e5 9557
-0002e6 950a
-0002e7 f7e1
-0002e8 910e
-0002e9 e000
-0002ea 9110 0149
-0002ec 9408
-0002ed 1f00
-0002ee 951a
+0002a2 910e
+0002a3 e000
+0002a4 9110 0149
+0002a6 9408
+0002a7 1f00
+0002a8 951a
+0002a9 f7e1
+0002aa 2350
+0002ab 9359
+0002ac 9543
+0002ad 2f56
+0002ae 916d
+0002af 953a
+0002b0 f7c9
+0002b1 9340 0143
+0002b3 c20a
+0002b4 91b1
+0002b5 91a1
+0002b6 30b0
+0002b7 f479
+0002b8 30a0
+0002b9 f068
+0002ba 34a0
+0002bb f458
+0002bc 9101
+0002bd 3000
+0002be f449
+0002bf 9101
+0002c0 3001
+0002c1 f030
+0002c2 e31e
+0002c3 1b1a
+0002c4 1701
+0002c5 f410
+0002c6 c002
+0002c7 c1cc
+0002c8 c1d9
+0002c9 93b0 0145
+0002cb 93a0 0146
+0002cd 9300 0149
+0002cf 9329
+0002d0 e010
+0002d1 ef3f
+0002d2 9513
+0002d3 3008
+0002d4 f018
+0002d5 5008
+0002d6 f009
+0002d7 f7d1
+0002d8 9319
+0002d9 9543
+0002da 2f31
+0002db 9100 0146
+0002dd e010
+0002de 9513
+0002df 3008
+0002e0 f018
+0002e1 5008
+0002e2 f009
+0002e3 f7d1
+0002e4 e0b1
+0002e5 e9a3
+0002e6 915d
+0002e7 951a
+0002e8 f7e9
+0002e9 916d
+0002ea 3000
+0002eb f021
+0002ec 9566
+0002ed 9557
+0002ee 950a
 0002ef f7e1
-0002f0 2350
-0002f1 9359
-0002f2 9543
-0002f3 2f56
-0002f4 916d
-0002f5 953a
-0002f6 f7c9
-0002f7 9340 0143
-0002f9 c1bc
-0002fa 91b1
-0002fb 91a1
-0002fc 30b0
-0002fd f479
-0002fe 30a0
-0002ff f068
-000300 32a0
-000301 f458
-000302 9111
-000303 9101
-000304 3010
-000305 f441
-000306 3001
-000307 f030
-000308 2f3a
-000309 0f30
-00030a 3231
-00030b f410
-00030c c002
-00030d c17e
-00030e c17d
-00030f 93b0 0145
-000311 93a0 0146
-000313 9300 0149
-000315 9329
-000316 0f00
-000317 9309
-000318 9100 0149
-00031a 9543
-00031b e0b2
-00031c e1a3
-00031d 9130 0146
-00031f 3030
-000320 f021
-000321 911d
-000322 911d
-000323 953a
-000324 f7e1
-000325 911d
-000326 9319
-000327 9543
-000328 911d
-000329 9319
-00032a 9543
-00032b 950a
-00032c f7c1
-00032d c188
-00032e 91b1
-00032f 91a1
-000330 30b0
-000331 f479
-000332 30a0
-000333 f068
-000334 32a0
-000335 f458
-000336 9111
-000337 9101
-000338 3010
-000339 f441
-00033a 3001
-00033b f030
-00033c 2f3a
-00033d 0f30
-00033e 3231
-00033f f410
-000340 c002
-000341 c14a
-000342 c149
-000343 93b0 0145
-000345 93a0 0146
-000347 9300 0149
-000349 9329
-00034a 0f00
-00034b 9309
-00034c 9100 0149
-00034e 9543
-00034f e0b1
-000350 eda3
-000351 9130 0146
-000353 3030
-000354 f281
-000355 911d
-000356 911d
-000357 953a
-000358 f7e1
-000359 911d
-00035a 9319
-00035b 9543
-00035c 911d
-00035d 9319
-00035e 9543
-00035f 950a
-000360 f7c1
-000361 c154
-000362 91b1
-000363 91a1
-000364 30b0
-000365 f599
-000366 30a0
-000367 f188
-000368 30a6
-000369 f578
-00036a 9111
-00036b 9101
-00036c 30a5
-00036d f141
-00036e 3000
-00036f f551
-000370 3010
-000371 f019
-000372 3f1f
-000373 f009
-000374 c025
-000375 9329
-000376 93b9
-000377 9543
-000378 93a9
-000379 9543
-00037a 9319
-00037b 9543
-00037c 9309
-00037d 9543
-00037e e061
-00037f 2f5a
-000380 3050
-000381 f019
-000382 0f66
-000383 955a
-000384 f7e9
-000385 e0b1
-000386 e5a3
-000387 3f1f
-000388 f431
-000389 910d
-00038a 2b06
-00038b 930e
-00038c 9340 0143
-00038e c127
-00038f 9560
-000390 910d
-000391 2306
-000392 930e
-000393 9340 0143
-000395 c120
-000396 3f1f
-000397 f411
-000398 ccef
-000399 c0f2
-00039a c0ff
-00039b 91b1
-00039c 91a1
-00039d 30b0
-00039e f439
-00039f 30a0
-0003a0 f028
-0003a1 32a0
-0003a2 f418
-0003a3 9111
-0003a4 9101
-0003a5 c002
-0003a6 c0e5
-0003a7 c0f2
-0003a8 9329
-0003a9 93b9
-0003aa 9543
-0003ab 93a9
-0003ac 9543
-0003ad 9319
-0003ae 9543
-0003af 9309
-0003b0 9543
-0003b1 2f3a
-0003b2 e0b2
-0003b3 e1a3
-0003b4 c000
-0003b5 3030
-0003b6 f021
-0003b7 915d
-0003b8 915d
-0003b9 953a
-0003ba f7e1
-0003bb 931d
-0003bc 930d
-0003bd c0f8
-0003be 91b1
-0003bf 91a1
-0003c0 30b0
-0003c1 f549
-0003c2 30a0
-0003c3 f138
-0003c4 30a5
-0003c5 f528
-0003c6 93b0 0145
-0003c8 93a0 0146
-0003ca 9101
-0003cb 3000
-0003cc f4f9
-0003cd 9300 0147
-0003cf 9101
-0003d0 3001
-0003d1 f0d0
-0003d2 e016
-0003d3 1b1a
-0003d4 1701
-0003d5 f4b0
-0003d6 9300 0148
-0003d8 9111
-0003d9 9310 0149
-0003db 3010
-0003dc f421
-0003dd 9513
-0003de 9310 0149
-0003e0 c00f
-0003e1 e038
-0003e2 9f31
-0003e3 1730
-0003e4 f040
-0003e5 5038
-0003e6 1730
-0003e7 f428
-0003e8 9310 0149
-0003ea c005
-0003eb c0a0
-0003ec c0ad
-0003ed c0ba
-0003ee e0b1
-0003ef e5a3
-0003f0 9100 0146
-0003f2 9110 0148
-0003f4 9170 0149
-0003f6 ef3f
-0003f7 9131
-0003f8 3018
-0003f9 f550
-0003fa 915d
-0003fb 3000
-0003fc f079
-0003fd 9556
-0003fe 9567
-0003ff 950a
-000400 f7e1
-000401 9100 0146
-000403 0f66
-000404 1f33
-000405 950a
-000406 f7e1
-000407 9100 0146
-000409 0f55
-00040a 950a
-00040b f7e9
-00040c 9100 0146
-00040e 0f01
-00040f e018
-000410 1b10
-000411 2f01
-000412 0f33
-000413 950a
-000414 f7e9
-000415 2f01
-000416 e060
-000417 0f55
-000418 1f66
-000419 950a
-00041a f7e1
-00041b 2f01
-00041c 9566
-00041d 9537
-00041e 950a
-00041f f7e1
-000420 e0b1
-000421 e5a3
-000422 933c
-000423 c006
-000424 e0b1
-000425 e5a3
-000426 916d
-000427 2363
-000428 936e
-000429 5018
-00042a 911f
-00042b 9110 0149
-00042d 951a
-00042e 9310 0149
-000430 931f
-000431 f621
-000432 9329
-000433 9100 0145
-000435 9309
-000436 9543
-000437 9100 0146
-000439 9309
-00043a 9543
-00043b 9100 0147
+0002f0 910e
+0002f1 e000
+0002f2 9110 0149
+0002f4 9408
+0002f5 1f00
+0002f6 951a
+0002f7 f7e1
+0002f8 2350
+0002f9 9359
+0002fa 9543
+0002fb 2f56
+0002fc 916d
+0002fd 953a
+0002fe f7c9
+0002ff 9340 0143
+000301 c1bc
+000302 91b1
+000303 91a1
+000304 30b0
+000305 f479
+000306 30a0
+000307 f068
+000308 32a0
+000309 f458
+00030a 9111
+00030b 9101
+00030c 3010
+00030d f441
+00030e 3001
+00030f f030
+000310 2f3a
+000311 0f30
+000312 3231
+000313 f410
+000314 c002
+000315 c17e
+000316 c17d
+000317 93b0 0145
+000319 93a0 0146
+00031b 9300 0149
+00031d 9329
+00031e 0f00
+00031f 9309
+000320 9100 0149
+000322 9543
+000323 e0b2
+000324 e1a3
+000325 9130 0146
+000327 3030
+000328 f021
+000329 911d
+00032a 911d
+00032b 953a
+00032c f7e1
+00032d 911d
+00032e 9319
+00032f 9543
+000330 911d
+000331 9319
+000332 9543
+000333 950a
+000334 f7c1
+000335 c188
+000336 91b1
+000337 91a1
+000338 30b0
+000339 f479
+00033a 30a0
+00033b f068
+00033c 32a0
+00033d f458
+00033e 9111
+00033f 9101
+000340 3010
+000341 f441
+000342 3001
+000343 f030
+000344 2f3a
+000345 0f30
+000346 3231
+000347 f410
+000348 c002
+000349 c14a
+00034a c149
+00034b 93b0 0145
+00034d 93a0 0146
+00034f 9300 0149
+000351 9329
+000352 0f00
+000353 9309
+000354 9100 0149
+000356 9543
+000357 e0b1
+000358 eda3
+000359 9130 0146
+00035b 3030
+00035c f281
+00035d 911d
+00035e 911d
+00035f 953a
+000360 f7e1
+000361 911d
+000362 9319
+000363 9543
+000364 911d
+000365 9319
+000366 9543
+000367 950a
+000368 f7c1
+000369 c154
+00036a 91b1
+00036b 91a1
+00036c 30b0
+00036d f599
+00036e 30a0
+00036f f188
+000370 30a6
+000371 f578
+000372 9111
+000373 9101
+000374 30a5
+000375 f141
+000376 3000
+000377 f551
+000378 3010
+000379 f019
+00037a 3f1f
+00037b f009
+00037c c025
+00037d 9329
+00037e 93b9
+00037f 9543
+000380 93a9
+000381 9543
+000382 9319
+000383 9543
+000384 9309
+000385 9543
+000386 e061
+000387 2f5a
+000388 3050
+000389 f019
+00038a 0f66
+00038b 955a
+00038c f7e9
+00038d e0b1
+00038e e5a3
+00038f 3f1f
+000390 f431
+000391 910d
+000392 2b06
+000393 930e
+000394 9340 0143
+000396 c127
+000397 9560
+000398 910d
+000399 2306
+00039a 930e
+00039b 9340 0143
+00039d c120
+00039e 3f1f
+00039f f411
+0003a0 cce7
+0003a1 c0f2
+0003a2 c0ff
+0003a3 91b1
+0003a4 91a1
+0003a5 30b0
+0003a6 f439
+0003a7 30a0
+0003a8 f028
+0003a9 32a0
+0003aa f418
+0003ab 9111
+0003ac 9101
+0003ad c002
+0003ae c0e5
+0003af c0f2
+0003b0 9329
+0003b1 93b9
+0003b2 9543
+0003b3 93a9
+0003b4 9543
+0003b5 9319
+0003b6 9543
+0003b7 9309
+0003b8 9543
+0003b9 2f3a
+0003ba e0b2
+0003bb e1a3
+0003bc c000
+0003bd 3030
+0003be f021
+0003bf 915d
+0003c0 915d
+0003c1 953a
+0003c2 f7e1
+0003c3 931d
+0003c4 930d
+0003c5 c0f8
+0003c6 91b1
+0003c7 91a1
+0003c8 30b0
+0003c9 f549
+0003ca 30a0
+0003cb f138
+0003cc 30a5
+0003cd f528
+0003ce 93b0 0145
+0003d0 93a0 0146
+0003d2 9101
+0003d3 3000
+0003d4 f4f9
+0003d5 9300 0147
+0003d7 9101
+0003d8 3001
+0003d9 f0d0
+0003da e016
+0003db 1b1a
+0003dc 1701
+0003dd f4b0
+0003de 9300 0148
+0003e0 9111
+0003e1 9310 0149
+0003e3 3010
+0003e4 f421
+0003e5 9513
+0003e6 9310 0149
+0003e8 c00f
+0003e9 e038
+0003ea 9f31
+0003eb 1730
+0003ec f040
+0003ed 5038
+0003ee 1730
+0003ef f428
+0003f0 9310 0149
+0003f2 c005
+0003f3 c0a0
+0003f4 c0ad
+0003f5 c0ba
+0003f6 e0b1
+0003f7 e5a3
+0003f8 9100 0146
+0003fa 9110 0148
+0003fc 9170 0149
+0003fe ef3f
+0003ff 9131
+000400 3018
+000401 f550
+000402 915d
+000403 3000
+000404 f079
+000405 9556
+000406 9567
+000407 950a
+000408 f7e1
+000409 9100 0146
+00040b 0f66
+00040c 1f33
+00040d 950a
+00040e f7e1
+00040f 9100 0146
+000411 0f55
+000412 950a
+000413 f7e9
+000414 9100 0146
+000416 0f01
+000417 e018
+000418 1b10
+000419 2f01
+00041a 0f33
+00041b 950a
+00041c f7e9
+00041d 2f01
+00041e e060
+00041f 0f55
+000420 1f66
+000421 950a
+000422 f7e1
+000423 2f01
+000424 9566
+000425 9537
+000426 950a
+000427 f7e1
+000428 e0b1
+000429 e5a3
+00042a 933c
+00042b c006
+00042c e0b1
+00042d e5a3
+00042e 916d
+00042f 2363
+000430 936e
+000431 5018
+000432 911f
+000433 9110 0149
+000435 951a
+000436 9310 0149
+000438 931f
+000439 f621
+00043a 9329
+00043b 9100 0145
 00043d 9309
 00043e 9543
-00043f 9100 0148
+00043f 9100 0146
 000441 9309
 000442 9543
-000443 9340 0143
-000445 c070
-000446 91b1
-000447 91a1
-000448 30b0
-000449 f4a1
-00044a 30a0
-00044b f090
-00044c 32a0
-00044d f480
-00044e 9111
-00044f 9101
-000450 3010
-000451 f469
-000452 3001
-000453 f058
-000454 2f3a
-000455 0f30
-000456 3231
-000457 f438
-000458 9131
-000459 2f50
-00045a 0f50
-00045b 1753
-00045c f411
-00045d c002
-00045e c02d
-00045f c02c
-000460 93b0 0145
-000462 93a0 0146
-000464 9330 0149
-000466 9329
-000467 93b9
-000468 9543
-000469 93a9
-00046a 9543
-00046b 9319
-00046c 9543
-00046d 9309
-00046e 9543
-00046f e0b2
-000470 e1a3
-000471 9150 0146
-000473 0f55
-000474 3050
-000475 f019
-000476 916d
-000477 955a
-000478 f7e9
-000479 9161
-00047a 936d
-00047b 953a
-00047c f7e1
-00047d c038
-00047e 933f
-00047f e830
-000480 0f32
-000481 9339
-000482 e031
-000483 9339
-000484 9130 0143
-000486 9533
-000487 9330 0143
-000489 9543
-00048a 913f
-00048b c02a
-00048c 933f
-00048d e830
-00048e 0f32
-00048f 9339
-000490 e032
-000491 9339
-000492 9130 0143
-000494 9533
-000495 9330 0143
-000497 9543
-000498 913f
-000499 c01c
-00049a 933f
-00049b e830
-00049c 0f32
-00049d 9339
-00049e e033
-00049f 9339
-0004a0 9130 0143
-0004a2 9533
-0004a3 9330 0143
-0004a5 9543
-0004a6 913f
-0004a7 c00e
-0004a8 933f
-0004a9 e830
-0004aa 0f32
-0004ab 9339
-0004ac e033
-0004ad 9339
-0004ae 9130 0143
-0004b0 9533
-0004b1 9330 0143
-0004b3 9543
-0004b4 913f
-0004b5 c000
-0004b6 916f
-0004b7 915f
-0004b8 913f
-0004b9 911f
-0004ba 910f
-0004bb bf0f
-0004bc 910f                      	Read_Func function
+000443 9100 0147
+000445 9309
+000446 9543
+000447 9100 0148
+000449 9309
+00044a 9543
+00044b 9340 0143
+00044d c070
+00044e 91b1
+00044f 91a1
+000450 30b0
+000451 f4a1
+000452 30a0
+000453 f090
+000454 32a0
+000455 f480
+000456 9111
+000457 9101
+000458 3010
+000459 f469
+00045a 3001
+00045b f058
+00045c 2f3a
+00045d 0f30
+00045e 3231
+00045f f438
+000460 9131
+000461 2f50
+000462 0f50
+000463 1753
+000464 f411
+000465 c002
+000466 c02d
+000467 c02c
+000468 93b0 0145
+00046a 93a0 0146
+00046c 9330 0149
+00046e 9329
+00046f 93b9
+000470 9543
+000471 93a9
+000472 9543
+000473 9319
+000474 9543
+000475 9309
+000476 9543
+000477 e0b2
+000478 e1a3
+000479 9150 0146
+00047b 0f55
+00047c 3050
+00047d f019
+00047e 916d
+00047f 955a
+000480 f7e9
+000481 9161
+000482 936d
+000483 953a
+000484 f7e1
+000485 c038
+000486 933f
+000487 e830
+000488 0f32
+000489 9339
+00048a e031
+00048b 9339
+00048c 9130 0143
+00048e 9533
+00048f 9330 0143
+000491 9543
+000492 913f
+000493 c02a
+000494 933f
+000495 e830
+000496 0f32
+000497 9339
+000498 e032
+000499 9339
+00049a 9130 0143
+00049c 9533
+00049d 9330 0143
+00049f 9543
+0004a0 913f
+0004a1 c01c
+0004a2 933f
+0004a3 e830
+0004a4 0f32
+0004a5 9339
+0004a6 e033
+0004a7 9339
+0004a8 9130 0143
+0004aa 9533
+0004ab 9330 0143
+0004ad 9543
+0004ae 913f
+0004af c00e
+0004b0 933f
+0004b1 e830
+0004b2 0f32
+0004b3 9339
+0004b4 e033
+0004b5 9339
+0004b6 9130 0143
+0004b8 9533
+0004b9 9330 0143
+0004bb 9543
+0004bc 913f
+0004bd c000
+0004be 916f
+0004bf 915f
+0004c0 913f
+0004c1 911f
+0004c2 910f
+0004c3 bf0f
+0004c4 910f                      	Read_Func function
                                  ;----------Начало передачи-----------;
                                  	;
                                  	;cbi PORTD,2
@@ -3308,60 +3316,60 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	;ld temp, X+
                                  	;sbr temp, $10
                                  	;st -X, temp
-0004bd 0000                      	nop
-0004be 0000                      	nop
-0004bf 0000                      	nop
-0004c0 9a92                      	sbi PORTD,2
+0004c5 0000                      	nop
+0004c6 0000                      	nop
+0004c7 0000                      	nop
+0004c8 9a92                      	sbi PORTD,2
                                  
-0004c1 9ac0                      	sbi	PORTB,0
+0004c9 9ac0                      	sbi	PORTB,0
                                  
-0004c2 e0d1                      	ldi YH, high(out_data)
-0004c3 e2c3                      	ldi YL, low(out_data)
+0004ca e0d1                      	ldi YH, high(out_data)
+0004cb e2c3                      	ldi YL, low(out_data)
                                  
-0004c4 9340 0143                 	sts out_offset, lenght
-0004c6 ef6f                      	ldi CRCLo, 0xff
-0004c7 ef5f                      	ldi CRCHi, 0xff
-0004c8 9100 0143                 	lds temp, out_offset
+0004cc 9340 0143                 	sts out_offset, lenght
+0004ce ef6f                      	ldi CRCLo, 0xff
+0004cf ef5f                      	ldi CRCHi, 0xff
+0004d0 9100 0143                 	lds temp, out_offset
                                  	main_loop:					; Передача пакета
-0004ca 9139                      	ld msg, Y+
-0004cb 930f
-0004cc 931f
-0004cd 2f03
-0004ce e018
-0004cf 2760
-0004d0 9556
-0004d1 9567
-0004d2 f420
-0004d3 ea00
-0004d4 2750
-0004d5 e001
-0004d6 2760
-0004d7 951a
-0004d8 f7b9
-0004d9 911f
-0004da 910f                      	crc16 msg
-0004db 930f
-0004dc b10b
-0004dd ff05
-0004de cffd
-0004df b93c
-0004e0 910f                      	USART_Trancieve msg
-0004e1 950a                      	dec temp
-0004e2 f739                      	brne main_loop
-0004e3 2f36                      	mov msg, CRCLo
-0004e4 930f
-0004e5 b10b
-0004e6 ff05
-0004e7 cffd
-0004e8 b93c
-0004e9 910f                      	USART_Trancieve msg		; Добавление CRC в передаваемый пакет
-0004ea 2f35                      	mov msg, CRCHi
-0004eb 930f
-0004ec b10b
-0004ed ff05
-0004ee cffd
-0004ef b93c
-0004f0 910f                      	USART_Trancieve msg
+0004d2 9139                      	ld msg, Y+
+0004d3 930f
+0004d4 931f
+0004d5 2f03
+0004d6 e018
+0004d7 2760
+0004d8 9556
+0004d9 9567
+0004da f420
+0004db ea00
+0004dc 2750
+0004dd e001
+0004de 2760
+0004df 951a
+0004e0 f7b9
+0004e1 911f
+0004e2 910f                      	crc16 msg
+0004e3 930f
+0004e4 b10b
+0004e5 ff05
+0004e6 cffd
+0004e7 b93c
+0004e8 910f                      	USART_Trancieve msg
+0004e9 950a                      	dec temp
+0004ea f739                      	brne main_loop
+0004eb 2f36                      	mov msg, CRCLo
+0004ec 930f
+0004ed b10b
+0004ee ff05
+0004ef cffd
+0004f0 b93c
+0004f1 910f                      	USART_Trancieve msg		; Добавление CRC в передаваемый пакет
+0004f2 2f35                      	mov msg, CRCHi
+0004f3 930f
+0004f4 b10b
+0004f5 ff05
+0004f6 cffd
+0004f7 b93c
+0004f8 910f                      	USART_Trancieve msg
                                  	
                                  	;ldi temp, 0x07				; Включение таймера и прерывания по его переполнению 5*256 тактов
                                  	;sts TCCR2, temp
@@ -3369,62 +3377,62 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	;sts out_flag, temp
                                  
                                  	Modbus_end:					; Сбрасываем память для приёма следующей посылки
-0004f1 9897                      	cbi	PORTD,7
-0004f2 e000                      	ldi temp,0x00
-0004f3 9300 0122                 	sts in_count, temp	
-0004f5 9300 0120                 	sts in_offset, temp
-0004f7 e2c3                      	ldi YL, low(out_data)
-0004f8 e0d1                          ldi YH, high(out_data)
-0004f9 e0e0                      	ldi ZL, low(in_data)
-0004fa e0f1                          ldi ZH, high(in_data)
-0004fb ef6f                      	ldi CRCLo, 0xff
-0004fc ef5f                      	ldi CRCHi, 0xff
+0004f9 9897                      	cbi	PORTD,7
+0004fa e000                      	ldi temp,0x00
+0004fb 9300 0122                 	sts in_count, temp	
+0004fd 9300 0120                 	sts in_offset, temp
+0004ff e2c3                      	ldi YL, low(out_data)
+000500 e0d1                          ldi YH, high(out_data)
+000501 e0e0                      	ldi ZL, low(in_data)
+000502 e0f1                          ldi ZH, high(in_data)
+000503 ef6f                      	ldi CRCLo, 0xff
+000504 ef5f                      	ldi CRCHi, 0xff
                                  
-0004fd efaf                      	ldi XL, low(0xffff)
-0004fe efbf                          ldi XH, high(0xffff)
-0004ff 9711                      	sbiw  XH:XL,1  
-000500 f7f1                      		brne	PC-1
+000505 efaf                      	ldi XL, low(0xffff)
+000506 efbf                          ldi XH, high(0xffff)
+000507 9711                      	sbiw  XH:XL,1  
+000508 f7f1                      		brne	PC-1
                                  	;/*
-000501 efaf                      	ldi XL, low(0xffff)
-000502 efbf                          ldi XH, high(0xffff)
-000503 9711                      	sbiw  XH:XL,1
-000504 efaf                      	ldi XL, low(0xffff)
-000505 efbf                          ldi XH, high(0xffff)
-000506 9711                      	sbiw  XH:XL,1  
-000507 f7f1                      		brne	PC-1
-000508 efaf                      	ldi XL, low(0xffff)
-000509 efbf                          ldi XH, high(0xffff)
-00050a 9711                      	sbiw  XH:XL,1
-00050b f7f1                      		brne	PC-1;*/
-00050c 98c0                      	cbi	PORTB,0
-00050d 9478                      	sei
-00050e cc95                      rjmp main
+000509 efaf                      	ldi XL, low(0xffff)
+00050a efbf                          ldi XH, high(0xffff)
+00050b 9711                      	sbiw  XH:XL,1
+00050c efaf                      	ldi XL, low(0xffff)
+00050d efbf                          ldi XH, high(0xffff)
+00050e 9711                      	sbiw  XH:XL,1  
+00050f f7f1                      		brne	PC-1
+000510 efaf                      	ldi XL, low(0xffff)
+000511 efbf                          ldi XH, high(0xffff)
+000512 9711                      	sbiw  XH:XL,1
+000513 f7f1                      		brne	PC-1;*/
+000514 98c0                      	cbi	PORTB,0
+000515 9478                      	sei
+000516 cc95                      rjmp main
                                  
                                  EEWrite_func:
-00050f 99e1                      	SBIC	EECR,	EEWE		
-000510 cffe                      	RJMP	EEWrite_func
+000517 99e1                      	SBIC	EECR,	EEWE		
+000518 cffe                      	RJMP	EEWrite_func
                                  		
-000511 bb2d                      	OUT 	EEDR,	r18
+000519 bb2d                      	OUT 	EEDR,	r18
                                   
-000512 9ae2                      	SBI 	EECR,	EEMWE
-000513 9ae1                      	SBI 	EECR,	EEWE
-000514 9508                      RET 
+00051a 9ae2                      	SBI 	EECR,	EEMWE
+00051b 9ae1                      	SBI 	EECR,	EEWE
+00051c 9508                      RET 
                                  
                                  EERead_func:
                                  
-000515 9508                      ret
+00051d 9508                      ret
                                  
                                  ADC_Conv_Complete:					; Прерывание по окончанию преобразования
                                  	;cli
-000516 930f                      	push	r16
-000517 931f                      	push	r17
+00051e 930f                      	push	r16
+00051f 931f                      	push	r17
                                  	;in r16, SREG
                                  	;push r16
                                  	;lds razr1,ADCL
-000518 b104                      	in		r16,	ADCL
-000519 b115                      	in		r17,	ADCH
-00051a 9310 01d5                 	sts		temperature, r17
-00051c 9300 01d6                 	sts		temperature+1, r16
+000520 b104                      	in		r16,	ADCL
+000521 b115                      	in		r17,	ADCH
+000522 9310 01d5                 	sts		temperature, r17
+000524 9300 01d6                 	sts		temperature+1, r16
                                  	;sts tmperature_data
                                  
                                  Vix:
@@ -3432,137 +3440,137 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	out ADMUX, temp
                                  	ldi temp, 0b11011100
                                  	out ADCSRA, temp*/
-00051e 911f                      	pop		r17
-00051f 910f                      	pop		r16
+000526 911f                      	pop		r17
+000527 910f                      	pop		r16
                                  	;out SREG, r16
                                  	;pop r16
                                  	;sei
-000520 9518                      reti
+000528 9518                      reti
                                  
                                  USART_Init:          ; Настройка USART
-000521 e000                      	ldi temp, high(UBRR_Value)
-000522 bd00                      	out UBRRH, temp
-000523 e100                      	ldi temp, low(UBRR_Value)
-000524 b909                      	out UBRRL, temp
+000529 e000                      	ldi temp, high(UBRR_Value)
+00052a bd00                      	out UBRRH, temp
+00052b e100                      	ldi temp, low(UBRR_Value)
+00052c b909                      	out UBRRL, temp
                                  
                                  	;ldi temp, (1<<UDRE)
                                  	;out UCSRA, temp
-000525 e908                      	ldi temp, (1<<TXEN)|(1<<RXEN)|(1<<RXCIE);|(1<<TXCIE0)||(1<< UDRIE0)
-000526 b90a                      	out UCSRB, temp
-000527 e80e                      	ldi temp,(1<<URSEL)|(3<<UCSZ0)|(1<< USBS)|(0<<UPM1)|(0<<UPM0)
-000528 bd00                      	out UCSRC, temp
+00052d e908                      	ldi temp, (1<<TXEN)|(1<<RXEN)|(1<<RXCIE);|(1<<TXCIE0)||(1<< UDRIE0)
+00052e b90a                      	out UCSRB, temp
+00052f e80e                      	ldi temp,(1<<URSEL)|(3<<UCSZ0)|(1<< USBS)|(0<<UPM1)|(0<<UPM0)
+000530 bd00                      	out UCSRC, temp
                                  
-000529 9508                      ret
+000531 9508                      ret
                                  
                                  Temperature_Read:		; Запись значений с термистора в оперативную память
-00052a 930f                      	push r16
+000532 930f                      	push r16
                                  	;sei
-00052b b70f
-00052c 930f
-00052d e000
-00052e bf0f                      	PushSREG
+000533 b70f
+000534 930f
+000535 e000
+000536 bf0f                      	PushSREG
                                  	;in r16, SREG
                                  	;push r16
-00052f 931f                      	push r17
-000530 932f                      	push r18
-000531 93af                      	push	XL
-000532 93bf                      	push	XH
-000533 93ef                      	push	ZL
-000534 93ff                      	push	ZH
+000537 931f                      	push r17
+000538 932f                      	push r18
+000539 93af                      	push	XL
+00053a 93bf                      	push	XH
+00053b 93ef                      	push	ZL
+00053c 93ff                      	push	ZH
                                  
                                  	;cli
                                  
-000535 e807                      	ldi temp, 0b10000111
-000536 b906                      	out ADCSRA, temp
+00053d e807                      	ldi temp, 0b10000111
+00053e b906                      	out ADCSRA, temp
                                  	;ldi XL,low(AI_data)
                                  	;ldi XH,high(AI_data)
                                  	;lds r16, temperature
                                  	;st X+, r16
                                  	;lds r16, temperature+1
                                  	;st X+, r16
-000537 9120 014d                 	lds		r18,	system_reg
+00053f 9120 014d                 	lds		r18,	system_reg
                                  
-000539 91b0 01d5                 	lds		XH,		temperature
-00053b 91a0 01d6                 	lds		XL,		temperature+1
+000541 91b0 01d5                 	lds		XH,		temperature
+000543 91a0 01d6                 	lds		XL,		temperature+1
                                  
-00053d e0f0                      	ldi		ZH,		high(2*TemprAr_Values)
-00053e e1ee                      	ldi		ZL,		low(2*TemprAr_Values)
+000545 e0f0                      	ldi		ZH,		high(2*TemprAr_Values)
+000546 e1ee                      	ldi		ZL,		low(2*TemprAr_Values)
                                  
-00053f ef2f                      	ldi		r18,	-1
+000547 ef2f                      	ldi		r18,	-1
                                  	Temperature_Read_Convertion:
-000540 9523                      		inc		r18
-000541 3728                      		cpi		r18,	TemprAr_Size
-000542 f029                      		breq	Temperature_Read_Convertion_End
-000543 9105                      		lpm		r16,	Z+
-000544 9115                      		lpm		r17,	Z+
-000545 1b0a                      		sub		r16,	XL
-000546 071b                      		cpc		r17,	XH
-000547 f7c0                      		brsh	Temperature_Read_Convertion
+000548 9523                      		inc		r18
+000549 3728                      		cpi		r18,	TemprAr_Size
+00054a f029                      		breq	Temperature_Read_Convertion_End
+00054b 9105                      		lpm		r16,	Z+
+00054c 9115                      		lpm		r17,	Z+
+00054d 1b0a                      		sub		r16,	XL
+00054e 071b                      		cpc		r17,	XH
+00054f f7c0                      		brsh	Temperature_Read_Convertion
                                  	Temperature_Read_Convertion_End:
-000548 2700                      	clr		r16
-000549 9300 01d3                 	sts		TemprAr_index,	r16
-00054b 9320 01d4                 	sts		TemprAr_index+1,	r18
+000550 2700                      	clr		r16
+000551 9300 01d3                 	sts		TemprAr_index,	r16
+000553 9320 01d4                 	sts		TemprAr_index+1,	r18
                                  	
-00054d 9110 0215                 	lds		r17,	temperature_min
-00054f 9100 0216                 	lds		r16,	temperature_min+1
+000555 9110 0215                 	lds		r17,	temperature_min
+000557 9100 0216                 	lds		r16,	temperature_min+1
                                  
-000551 91b0 01d3                 	lds		XH,		TemprAr_index
-000553 91a0 01d4                 	lds		XL,		TemprAr_index+1
+000559 91b0 01d3                 	lds		XH,		TemprAr_index
+00055b 91a0 01d4                 	lds		XL,		TemprAr_index+1
                                  
-000555 9120 014d                 	lds		r18,	system_reg
+00055d 9120 014d                 	lds		r18,	system_reg
                                  
-000557 1b0a                      	sub		r16,	XL
-000558 071b                      	cpc		r17,	XH
-000559 f020                      	brlo	check_over_max
+00055f 1b0a                      	sub		r16,	XL
+000560 071b                      	cpc		r17,	XH
+000561 f020                      	brlo	check_over_max
                                  		;ldi temp, 6 ;Включаем таймер
                                  		;out TCCR2, temp
                                  		;ldi		r18,	0x01
-00055a fd20                      		sbrc	r18,	0
-00055b c002                      			rjmp	check_over_max
-00055c 6021                      		sbr		r18,	0b00000001
-00055d d03f                      		rcall	TIMER1_Start
+000562 fd20                      		sbrc	r18,	0
+000563 c002                      			rjmp	check_over_max
+000564 6021                      		sbr		r18,	0b00000001
+000565 d03f                      		rcall	TIMER1_Start
                                  		;rjmp	check_over_max
                                  
                                  	check_over_max:
-00055e 9110 0217                 	lds		r17,	temperature_max
-000560 9100 0218                 	lds		r16,	temperature_max+1
+000566 9110 0217                 	lds		r17,	temperature_max
+000568 9100 0218                 	lds		r16,	temperature_max+1
                                  	;adiw	r16,	1
-000562 1b0a                      	sub		r16,	XL
-000563 071b                      	cpc		r17,	XH
-000564 f430                      	brsh	Read_end;good_temp
+00056a 1b0a                      	sub		r16,	XL
+00056b 071b                      	cpc		r17,	XH
+00056c f430                      	brsh	Read_end;good_temp
                                  		;ldi		r18,	6 ;Включаем таймер
                                  		;out		TCCR2,	r18
                                  		;ldi		r18,	0x02
-000565 fd21                      		sbrc	r18,	1
-000566 c004                      			rjmp	Read_end
-000567 6022                      		sbr			r18,	0b00000010
-000568 d034                      		rcall	TIMER1_Start
-000569 c001                      		rjmp	Read_end
+00056d fd21                      		sbrc	r18,	1
+00056e c004                      			rjmp	Read_end
+00056f 6022                      		sbr			r18,	0b00000010
+000570 d034                      		rcall	TIMER1_Start
+000571 c001                      		rjmp	Read_end
                                  
                                  	good_temp:
                                  		;ldi		r18,	6 ;Включаем таймер
                                  		;out		TCCR2,	r18
-00056a e020                      		ldi		r18,	0x00
+000572 e020                      		ldi		r18,	0x00
                                  	Read_end:
-00056b 9320 014d                 	sts		system_reg,	r18
-00056d 3020                      	cpi		r18,	0
-00056e f429                      	brne	Read_end_1
-00056f 9120 0193                 		lds		r18,	DI_Data
-000571 7f2c                      		cbr		r18,	0b00000011
-000572 9320 0193                 		sts		DI_Data,	r18
+000573 9320 014d                 	sts		system_reg,	r18
+000575 3020                      	cpi		r18,	0
+000576 f429                      	brne	Read_end_1
+000577 9120 0193                 		lds		r18,	DI_Data
+000579 7f2c                      		cbr		r18,	0b00000011
+00057a 9320 0193                 		sts		DI_Data,	r18
                                  	Read_end_1:
-000574 ec0f                      	ldi		temp,		0b11001111
-000575 b906                      	out		ADCSRA,		temp
-000576 91ff                      	pop		ZH
-000577 91ef                      	pop		ZL
-000578 91bf                      	pop		XH
-000579 91af                      	pop		XL
-00057a 912f                      	pop		r18
-00057b 911f                      	pop		r17
-00057c 910f
-00057d bf0f                      	popSREG
-00057e 910f                      	pop		r16
-00057f 9508                      ret
+00057c ec0f                      	ldi		temp,		0b11001111
+00057d b906                      	out		ADCSRA,		temp
+00057e 91ff                      	pop		ZH
+00057f 91ef                      	pop		ZL
+000580 91bf                      	pop		XH
+000581 91af                      	pop		XL
+000582 912f                      	pop		r18
+000583 911f                      	pop		r17
+000584 910f
+000585 bf0f                      	popSREG
+000586 910f                      	pop		r16
+000587 9508                      ret
                                  	/*
                                  	lds r17, temperature_min
                                  	cp r16,r17
@@ -3612,40 +3620,40 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  USART_RXC:
                                  	;push r16
                                  	;in r16, SREG
-000580 930f                      	push r16
-000581 b70f
-000582 930f
-000583 e000
-000584 bf0f                      	pushSreg
-000585 933f                      	push r19
-000586 934f                      	push r20
+000588 930f                      	push r16
+000589 b70f
+00058a 930f
+00058b e000
+00058c bf0f                      	pushSreg
+00058d 933f                      	push r19
+00058e 934f                      	push r20
                                  
-000587 9140 0120                 	lds r20,in_offset
-000589 314f                      	cpi r20, BUF_LEN-1
-00058a f460                      	brsh RXC_end					; защита на слишком длинный пакет
+00058f 9140 0120                 	lds r20,in_offset
+000591 314f                      	cpi r20, BUF_LEN-1
+000592 f460                      	brsh RXC_end					; защита на слишком длинный пакет
                                  
-00058b b10b                      	in r16, UCSRA
-00058c ff07                      	sbrs r16, RXC
-00058d cff2                      	rjmp USART_RXC
+000593 b10b                      	in r16, UCSRA
+000594 ff07                      	sbrs r16, RXC
+000595 cff2                      	rjmp USART_RXC
                                  
                                  	in_setbyte:
-00058e b10c                      	in r16, UDR					 ;Запись в буфер приёма
-00058f 9301                      	st Z+,r16
-000590 9543                      	inc r20 
-000591 9340 0120                 	sts in_offset, r20
-000593 e044                      	ldi r20,READ_TIME 
-000594 9340 0121                 	sts in_flag, r20
-000596 c000                      	rjmp RXC_end
+000596 b10c                      	in r16, UDR					 ;Запись в буфер приёма
+000597 9301                      	st Z+,r16
+000598 9543                      	inc r20 
+000599 9340 0120                 	sts in_offset, r20
+00059b e044                      	ldi r20,READ_TIME 
+00059c 9340 0121                 	sts in_flag, r20
+00059e c000                      	rjmp RXC_end
                                  
                                  	RXC_end:
-000597 914f                      	pop r20
-000598 913f                      	pop r19
-000599 910f
-00059a bf0f                      	popSreg
-00059b 910f                      	pop r16
+00059f 914f                      	pop r20
+0005a0 913f                      	pop r19
+0005a1 910f
+0005a2 bf0f                      	popSreg
+0005a3 910f                      	pop r16
                                  	;out SREG, r16
                                  	;pop r16
-00059c 9518                      reti
+0005a4 9518                      reti
                                  
                                  /*TIMER2_OVF:							; Прерывание по переполнению 2 таймера
                                  	push r20
@@ -3677,84 +3685,84 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  reti*/
                                  
                                  TIMER1_Start:
-00059d 930f                      	push	temp
-00059e e004                      	ldi		temp,	(0<<WGM13)|(0<<WGM12)|(1<<CS12)|(0<<CS11)|(0<<CS10)
-00059f bd0e                      	out		TCCR1B,	temp
-0005a0 b709                      	in		temp,	TIMSK
-0005a1 6004                      	sbr		temp,	(1<<TOIE1)
-0005a2 bf09                      	out		TIMSK,	temp
-0005a3 910f                      	pop		temp
-0005a4 9508                      ret
-                                 TIMER1_Stop:
 0005a5 930f                      	push	temp
-0005a6 e000                      	ldi		temp,	(0<<WGM13)|(0<<WGM12)|(0<<CS12)|(0<<CS11)|(0<<CS10)
+0005a6 e004                      	ldi		temp,	(0<<WGM13)|(0<<WGM12)|(1<<CS12)|(0<<CS11)|(0<<CS10)
 0005a7 bd0e                      	out		TCCR1B,	temp
 0005a8 b709                      	in		temp,	TIMSK
-0005a9 7f0b                      	cbr		temp,	(1<<TOIE1)
+0005a9 6004                      	sbr		temp,	(1<<TOIE1)
 0005aa bf09                      	out		TIMSK,	temp
-0005ab e000                      	ldi		temp,	0
-0005ac bd0d                      	out		TCNT1H,	temp
-0005ad bd0c                      	out		TCNT1L,	temp
-0005ae 910f                      	pop		temp
-0005af 9508                      ret
+0005ab 910f                      	pop		temp
+0005ac 9508                      ret
+                                 TIMER1_Stop:
+0005ad 930f                      	push	temp
+0005ae e000                      	ldi		temp,	(0<<WGM13)|(0<<WGM12)|(0<<CS12)|(0<<CS11)|(0<<CS10)
+0005af bd0e                      	out		TCCR1B,	temp
+0005b0 b709                      	in		temp,	TIMSK
+0005b1 7f0b                      	cbr		temp,	(1<<TOIE1)
+0005b2 bf09                      	out		TIMSK,	temp
+0005b3 e000                      	ldi		temp,	0
+0005b4 bd0d                      	out		TCNT1H,	temp
+0005b5 bd0c                      	out		TCNT1L,	temp
+0005b6 910f                      	pop		temp
+0005b7 9508                      ret
                                  TIMER1_OVF:
-0005b0 930f                      	push	r16
-0005b1 b70f
-0005b2 930f
-0005b3 e000
-0005b4 bf0f                      	pushSREG
-0005b5 931f                      	push	r17
-0005b6 932f                      	push	r18
-0005b7 933f                      	push	r19
-0005b8 93af                      	push	XL
-0005b9 93bf                      	push	XH
+0005b8 930f                      	push	r16
+0005b9 b70f
+0005ba 930f
+0005bb e000
+0005bc bf0f                      	pushSREG
+0005bd 931f                      	push	r17
+0005be 932f                      	push	r18
+0005bf 933f                      	push	r19
+0005c0 93af                      	push	XL
+0005c1 93bf                      	push	XH
                                  
-0005ba 91b0 01d3                 	lds		XH,		TemprAr_index
-0005bc 91a0 01d4                 	lds		XL,		TemprAr_index+1
+0005c2 91b0 01d3                 	lds		XH,		TemprAr_index
+0005c4 91a0 01d4                 	lds		XL,		TemprAr_index+1
                                  
-0005be 9110 0215                 	lds		r17,	temperature_min
-0005c0 9100 0216                 	lds		r16,	temperature_min+1
+0005c6 9110 0215                 	lds		r17,	temperature_min
+0005c8 9100 0216                 	lds		r16,	temperature_min+1
                                  
-0005c2 9120 014d                 	lds		r18,	system_reg
-0005c4 9130 0193                 	lds		r19,	DI_Data
+0005ca 9120 014d                 	lds		r18,	system_reg
+0005cc 9130 0193                 	lds		r19,	DI_Data
                                  
-0005c6 1b0a                      	sub		r16,	XL
-0005c7 071b                      	cpc		r17,	XH
-0005c8 f018                      	brlo	TIMER1_OVF_check_over_max
-0005c9 ff20                      		sbrs	r18,	0
-0005ca c001                      			rjmp	TIMER1_OVF_check_over_max
-0005cb 6031                      		sbr		r19,	0b00000001
+0005ce 1b0a                      	sub		r16,	XL
+0005cf 071b                      	cpc		r17,	XH
+0005d0 f018                      	brlo	TIMER1_OVF_check_over_max
+0005d1 ff20                      		sbrs	r18,	0
+0005d2 c001                      			rjmp	TIMER1_OVF_check_over_max
+0005d3 6031                      		sbr		r19,	0b00000001
                                  		;rjmp	TIMER1_OVF_check_over_max
                                  
                                  	TIMER1_OVF_check_over_max:
-0005cc 9110 0217                 	lds		r17,	temperature_max
-0005ce 9100 0218                 	lds		r16,	temperature_max+1
-0005d0 1b0a                      	sub		r16,	XL
-0005d1 071b                      	cpc		r17,	XH
-0005d2 f428                      	brsh	TIMER1_OVF_Read_end;TIMER1_OVF_good_temp
-0005d3 ff21                      		sbrs	r18,	1
-0005d4 c003                      			rjmp	TIMER1_OVF_Read_end
-0005d5 6032                      		sbr		r19,	0b00000010
-0005d6 c001                      		rjmp	TIMER1_OVF_Read_end
+0005d4 9110 0217                 	lds		r17,	temperature_max
+0005d6 9100 0218                 	lds		r16,	temperature_max+1
+0005d8 1b0a                      	sub		r16,	XL
+0005d9 071b                      	cpc		r17,	XH
+0005da f428                      	brsh	TIMER1_OVF_Read_end;TIMER1_OVF_good_temp
+0005db ff21                      		sbrs	r18,	1
+0005dc c003                      			rjmp	TIMER1_OVF_Read_end
+0005dd 6032                      		sbr		r19,	0b00000010
+0005de c001                      		rjmp	TIMER1_OVF_Read_end
                                  
                                  	TIMER1_OVF_good_temp:
-0005d7 e030                      		ldi		r19,	0x00
+0005df e030                      		ldi		r19,	0x00
                                  
                                  	TIMER1_OVF_Read_end:
-0005d8 9330 0193                 	sts		DI_Data,	r19
-0005da e020                      	ldi		r18,	0x00
-0005db 9320 014d                 	sts		system_reg,	r18
-0005dd dfc7                      	rcall	TIMER1_Stop
+0005e0 9330 0193                 	sts		DI_Data,	r19
+0005e2 e020                      	ldi		r18,	0x00
+0005e3 9320 014d                 	sts		system_reg,	r18
+0005e5 dfc7                      	rcall	TIMER1_Stop
                                  
-0005de 91bf                      	pop		XH
-0005df 91af                      	pop		XL
-0005e0 913f                      	pop		r19
-0005e1 912f                      	pop		r18
-0005e2 911f                      	pop		r17
-0005e3 910f
-0005e4 bf0f                      	PopSREG
-0005e5 910f                      	pop		r16
-0005e6 9518                      reti
+0005e6 91bf                      	pop		XH
+0005e7 91af                      	pop		XL
+0005e8 913f                      	pop		r19
+0005e9 912f                      	pop		r18
+0005ea 911f                      	pop		r17
+0005eb 910f
+0005ec bf0f                      	PopSREG
+0005ed 910f                      	pop		r16
+0005ee 9518                      reti
                                  /*
                                  TIMER2_OVF:							; Таймер на проверку перехода температуры
                                  	;cli
@@ -3771,7 +3779,7 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  	push	XH
                                  	;ldi temp, 0				;Вычключаем таймер
                                  	;out TCCR1B, temp
-D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): warning: '/*' in comment 
+D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2209): warning: '/*' in comment 
                                  	;/*
                                  	ldi r16, 0
                                  	out TCCR2, r16
@@ -3821,14 +3829,14 @@ D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm(2201): w
                                  TIMER0_OVF:							; Прерывание по переполнению 0 таймера - проверка на конец пакета
                                  	;push r20
                                  	;in r20, SREG
-0005e7 934f                      	push r20
-0005e8 9140 0121                 	lds r20, in_flag				; Цикл 4 раза проходит по времени принятия одного байта, и если новых байт на приёме нет,
-0005ea 2344                      	and r20,r20						; то в in_flag заносится 0,что сигнализирует о окончании пакета
-0005eb f019                      	breq OVF0_end
-0005ec 954a                      	dec r20
-0005ed 9340 0121                 	sts in_flag,r20
+0005ef 934f                      	push r20
+0005f0 9140 0121                 	lds r20, in_flag				; Цикл 4 раза проходит по времени принятия одного байта, и если новых байт на приёме нет,
+0005f2 2344                      	and r20,r20						; то в in_flag заносится 0,что сигнализирует о окончании пакета
+0005f3 f019                      	breq OVF0_end
+0005f4 954a                      	dec r20
+0005f5 9340 0121                 	sts in_flag,r20
                                    OVF0_end:
-0005ef 914f                      	pop r20
+0005f7 914f                      	pop r20
                                  	;out SREG, r20
                                  	;pop r20
 
@@ -3850,7 +3858,7 @@ counted separately from r26..r31 here.
 "ATmega8A" register use summary:
 x  :  31 y  :  44 z  :  44 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16: 369 r17: 137 r18:  56 r19: 105 r20:  52 
+r13:   0 r14:   0 r15:   0 r16: 370 r17: 136 r18:  56 r19: 105 r20:  52 
 r21:  39 r22:  37 r23:   3 r24:  48 r25:   0 r26:  81 r27:  64 r28:   4 
 r29:   4 r30:   9 r31:   9 
 Registers used: 18 out of 35 (51.4%)
@@ -3869,8 +3877,8 @@ ijmp  :   0 in    :  24 inc   :  41 ld    :  64 ldd   :   0 ldi   : 163
 lds   :  69 lpm   :   2 lsl   :   5 lsr   :   6 mov   :  27 movw  :   0 
 mul   :   1 muls  :   0 mulsu :   0 neg   :   0 nop   :  29 or    :   1 
 ori   :   0 out   :  76 pop   :  61 push  :  61 rcall :  14 ret   :   6 
-reti  :   4 rjmp  :  86 rol   :   4 ror   :   6 sbc   :   0 sbci  :   0 
-sbi   :  16 sbic  :   9 sbis  :   0 sbiw  :   4 sbr   :   5 sbrc  :   4 
+reti  :   4 rjmp  :  90 rol   :   4 ror   :   6 sbc   :   0 sbci  :   0 
+sbi   :  16 sbic  :  13 sbis  :   0 sbiw  :   4 sbr   :   5 sbrc  :   4 
 sbrs  :   8 sec   :   2 seh   :   0 sei   :   3 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
 st    :  53 std   :   0 sts   :  76 sub   :   9 subi  :   6 swap  :   0 
@@ -3880,7 +3888,7 @@ Instructions used: 51 out of 110 (46.4%)
 "ATmega8A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000be2   2780    242   3022    8192  36.9%
+[.cseg] 0x000000 0x000bf2   2796    242   3038    8192  37.1%
 [.dseg] 0x000060 0x000253      0    339    339    1024  33.1%
 [.eseg] 0x000000 0x000000      0      0      0     512   0.0%
 

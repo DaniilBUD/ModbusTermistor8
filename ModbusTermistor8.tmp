@@ -46,49 +46,49 @@
   <DO_data><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>953</LINE></DO_data>
   <DI_data><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>954</LINE></DI_data>
   <Reset><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1228</LINE></Reset>
-  <TIMER1_OVF><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2131</LINE></TIMER1_OVF>
-  <TIMER0_OVF><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2247</LINE></TIMER0_OVF>
-  <USART_RXC><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2047</LINE></USART_RXC>
-  <ADC_Conv_Complete><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1856</LINE></ADC_Conv_Complete>
+  <TIMER1_OVF><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2139</LINE></TIMER1_OVF>
+  <TIMER0_OVF><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2255</LINE></TIMER0_OVF>
+  <USART_RXC><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2055</LINE></USART_RXC>
+  <ADC_Conv_Complete><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1864</LINE></ADC_Conv_Complete>
   <TemprAr_Values><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>979</LINE></TemprAr_Values>
   <mem_cl><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1242</LINE></mem_cl>
   <mem_cl2><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1244</LINE></mem_cl2>
-  <USART_Init><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1881</LINE></USART_Init>
+  <USART_Init><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1889</LINE></USART_Init>
   <AdrRead_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1367</LINE></AdrRead_end>
   <TemMinRead_CLRD><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1383</LINE></TemMinRead_CLRD>
-  <TemMinRead_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1407</LINE></TemMinRead_End>
-  <EEWrite_func><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1842</LINE></EEWrite_func>
-  <TemMaxRead_CLRD><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1421</LINE></TemMaxRead_CLRD>
-  <TemMaxRead_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1450</LINE></TemMaxRead_End>
-  <main><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1537</LINE></main>
-  <Temperature_Read><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1896</LINE></Temperature_Read>
-  <main_check_tempmin><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1615</LINE></main_check_tempmin>
-  <main_check_tempmin_chgd><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1625</LINE></main_check_tempmin_chgd>
-  <main_check_tempmax><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1638</LINE></main_check_tempmax>
-  <main_check_tempmax_chgd><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1648</LINE></main_check_tempmax_chgd>
-  <main_AO_check_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1683</LINE></main_AO_check_end>
-  <Main_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1710</LINE></Main_end>
-  <MODBUS_Communication><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1716</LINE></MODBUS_Communication>
-  <wait_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1733</LINE></wait_end>
-  <Modbus_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1810</LINE></Modbus_end>
-  <calc_crc><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1743</LINE></calc_crc>
-  <end_receive><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1755</LINE></end_receive>
-  <main_loop><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1794</LINE></main_loop>
-  <EERead_func><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1852</LINE></EERead_func>
-  <Vix><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1869</LINE></Vix>
-  <Temperature_Read_Convertion><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1928</LINE></Temperature_Read_Convertion>
-  <Temperature_Read_Convertion_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1937</LINE></Temperature_Read_Convertion_End>
-  <check_over_max><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1962</LINE></check_over_max>
-  <TIMER1_Start><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2110</LINE></TIMER1_Start>
-  <Read_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1982</LINE></Read_end>
-  <good_temp><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1978</LINE></good_temp>
-  <Read_end_1><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1989</LINE></Read_end_1>
-  <RXC_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2072</LINE></RXC_end>
-  <in_setbyte><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2063</LINE></in_setbyte>
-  <TIMER1_Stop><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2119</LINE></TIMER1_Stop>
-  <TIMER1_OVF_check_over_max><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2157</LINE></TIMER1_OVF_check_over_max>
-  <TIMER1_OVF_Read_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2171</LINE></TIMER1_OVF_Read_end>
-  <TIMER1_OVF_good_temp><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2168</LINE></TIMER1_OVF_good_temp>
-  <OVF0_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2256</LINE></OVF0_end>
+  <TemMinRead_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1411</LINE></TemMinRead_End>
+  <EEWrite_func><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1850</LINE></EEWrite_func>
+  <TemMaxRead_CLRD><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1425</LINE></TemMaxRead_CLRD>
+  <TemMaxRead_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1458</LINE></TemMaxRead_End>
+  <main><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1545</LINE></main>
+  <Temperature_Read><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1904</LINE></Temperature_Read>
+  <main_check_tempmin><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1623</LINE></main_check_tempmin>
+  <main_check_tempmin_chgd><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1633</LINE></main_check_tempmin_chgd>
+  <main_check_tempmax><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1646</LINE></main_check_tempmax>
+  <main_check_tempmax_chgd><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1656</LINE></main_check_tempmax_chgd>
+  <main_AO_check_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1691</LINE></main_AO_check_end>
+  <Main_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1718</LINE></Main_end>
+  <MODBUS_Communication><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1724</LINE></MODBUS_Communication>
+  <wait_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1741</LINE></wait_end>
+  <Modbus_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1818</LINE></Modbus_end>
+  <calc_crc><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1751</LINE></calc_crc>
+  <end_receive><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1763</LINE></end_receive>
+  <main_loop><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1802</LINE></main_loop>
+  <EERead_func><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1860</LINE></EERead_func>
+  <Vix><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1877</LINE></Vix>
+  <Temperature_Read_Convertion><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1936</LINE></Temperature_Read_Convertion>
+  <Temperature_Read_Convertion_End><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1945</LINE></Temperature_Read_Convertion_End>
+  <check_over_max><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1970</LINE></check_over_max>
+  <TIMER1_Start><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2118</LINE></TIMER1_Start>
+  <Read_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1990</LINE></Read_end>
+  <good_temp><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1986</LINE></good_temp>
+  <Read_end_1><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>1997</LINE></Read_end_1>
+  <RXC_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2080</LINE></RXC_end>
+  <in_setbyte><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2071</LINE></in_setbyte>
+  <TIMER1_Stop><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2127</LINE></TIMER1_Stop>
+  <TIMER1_OVF_check_over_max><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2165</LINE></TIMER1_OVF_check_over_max>
+  <TIMER1_OVF_Read_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2179</LINE></TIMER1_OVF_Read_end>
+  <TIMER1_OVF_good_temp><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2176</LINE></TIMER1_OVF_good_temp>
+  <OVF0_end><FILE>D:\Study\AVR_Projects\ModbusTermistorProject8\ModbusTermistor8\main.asm</FILE><LINE>2264</LINE></OVF0_end>
  </LABELS>
 </ASSEMBLER_INFO>
